@@ -15,27 +15,36 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 type MyProps={
-    ability:TypeAbility
+    abilityOptions:TypeAbility
+    abilitySelected:TypeAbility
+
     sendToParent:any,
 }
 type MyState ={
-  ability:TypeAbility
+  abilityOptions:TypeAbility
+  abilitySelected:TypeAbility
 }
 export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   constructor(props:MyProps){
     super(props)
     this.state={
-      ability: this.props.ability
+      abilityOptions: this.props.abilityOptions,
+      abilitySelected: this.props.abilitySelected,
     }
     this.abilityOnChange = this.abilityOnChange.bind(this);
   }
   //event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails
   abilityOnChange(
-    event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, ID:string, details?: AutocompleteChangeDetails)
+    event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, ID: ("trigger" | "effect" | "target"), details?: AutocompleteChangeDetails)
     {
       console.log("value:")
       console.log(value)
       console.log("ID:" + ID)
+      let temp_ability:TypeAbility
+      temp_ability = this.state.abilitySelected
+      temp_ability[ID] = value
+      this.setState({abilitySelected:temp_ability})
+      this.props.sendToParent(this.state.abilitySelected)
   }
   render() { return (
     <Box sx={{ width: "100%" }}>
@@ -46,7 +55,8 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
           multiple
           id="trigger"
           onChange={(event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails) => this.abilityOnChange(event,value,reason,"trigger",details,)}
-          options={this.state.ability.trigger}
+          options={this.state.abilityOptions.trigger}
+          defaultValue={this.state.abilitySelected.trigger}
           disableCloseOnSelect
           getOptionLabel={(option) => option} 
           renderOption={(props, option, { selected }) => (
@@ -72,7 +82,8 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
         <Autocomplete 
           multiple
           id="target"
-          options={this.state.ability.target}
+          options={this.state.abilityOptions.target}
+          defaultValue={this.state.abilitySelected.target}
           disableCloseOnSelect
           getOptionLabel={(option) => option}
           renderOption={(props, option, { selected }) => (
@@ -98,7 +109,8 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
         <Autocomplete 
           multiple
           id="effect"
-          options={this.state.ability.effect}
+          options={this.state.abilityOptions.effect}
+          defaultValue={this.state.abilitySelected.effect}
           disableCloseOnSelect
           getOptionLabel={(option) => option}
           renderOption={(props, option, { selected }) => (

@@ -24,7 +24,9 @@ type MyState ={
   tabsArray: boolean[], 
   value: number,
   stats: TypeStats
-  ability: TypeAbility
+  abilityOptions: TypeAbility
+  abilitySelected: TypeAbility
+
 }
 export default class Filters extends React.Component<MyProps, MyState> {
   stats:TypeStats
@@ -52,10 +54,15 @@ export default class Filters extends React.Component<MyProps, MyState> {
         "specialDefense":{"min":0,"max":255},
         "speed":{"min":0,"max":255}
       },
-      ability:{
+      abilityOptions:{
         "trigger": ["trigger01","trigger02","trigger03"],
         "target": ["asd2"],
         "effect": ["asd3"]
+      },
+      abilitySelected:{
+        "trigger": [],
+        "target": [],
+        "effect": []
       }
     }
     //const [tabsArray, setTabsArray] = useState([true,true,true,true,true]);
@@ -104,7 +111,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
     this.setState({stats: data});
   }
   getAbilityData = (data:TypeAbility) =>{
-    this.setState({ability: data});
+    this.setState({abilitySelected: data});
   }
   render() { return (
     <Box sx={{ width: '100%' }}>
@@ -125,7 +132,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
       <StatsTab sendToParent={this.getStatData} stats={this.state.stats }/>
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={2}>
-      <AbiltiesTab ability={this.state.ability} sendToParent={this.getAbilityData} />
+      <AbiltiesTab abilityOptions={this.state.abilityOptions} abilitySelected={this.state.abilitySelected} sendToParent={this.getAbilityData} />
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={3}>
       Moves
