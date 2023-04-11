@@ -139,8 +139,8 @@ export default class movesTab extends React.Component<MyProps, MyState> {
           <Accordion key={i} expanded={this.state.expanded === i} >
             <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                 <Grid container justifyContent="space-between" >
-                    <Grid onClick={()=>{this.changePanel(i)}}  width={"95%"}>{item.title.value} </Grid>
-                    <Grid>
+                    <Grid onMouseDown={()=>{this.changePanel(i)}}  width={"95%"}>{item.title.value} </Grid>
+                    <Grid >
                       <EditIcon onClick={()=>this.DialogOpen(i)} sx={{color:"blue"}}/>
                       <CloseIcon  onClick={()=>this.removeMove(i)} sx={{color:"red"}}/>
                     </Grid>
