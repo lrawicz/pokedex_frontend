@@ -7,13 +7,14 @@ import MuiAccordionSummary, {
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { TypeMinMax, TypeMove,TypeMoveProperties } from '../../../Interface';
+import { ClassMove, TypeMinMax, TypeMove,TypeMoveProperties } from '../../../Interface';
 import CloseIcon from '@mui/icons-material/Close';
 
 import ComboBoxTags from '../../combo-box-tags/combo-box-tags'
 import RangeBar from '../../range-bar/range-bar'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 
 
@@ -77,6 +78,8 @@ export default class movesTab extends React.Component<MyProps, MyState> {
         this.handleChange = this.handleChange.bind(this);
         this.removeMove = this.removeMove.bind(this);
         this.getData = this.getData.bind(this);
+        this.addMove = this.addMove.bind(this);
+
     }
     handleChange(panelID: number){
         if (panelID === this.state.expanded){
@@ -104,6 +107,17 @@ export default class movesTab extends React.Component<MyProps, MyState> {
             })
         }
         this.props.sendToParent(this.state.moves)
+    }
+    addMove(){
+      let temp_move = new ClassMove
+      let temp_moves = this.state.moves
+      temp_move.title = (this.state.moves.length +1).toString()
+      temp_moves.push(temp_move)
+      this.setState({
+        moves: temp_moves
+      })
+      this.props.sendToParent(this.state.moves)
+      
     }
     //
     render() {
@@ -203,7 +217,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
     return (
         <Box>
             {show_moves}
-            + add move 
+            <Button onClick={this.addMove} variant="contained">add move</Button>
         </Box>
   )}
 }
