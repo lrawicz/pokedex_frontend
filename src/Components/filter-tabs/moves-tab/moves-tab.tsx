@@ -90,7 +90,6 @@ export default class movesTab extends React.Component<MyProps, MyState> {
             panelID =-1
         }
         this.setState({expanded:panelID})
-        
     }
     removeMove(index:number){
         let temp_moves:ClassMove[]
@@ -137,12 +136,12 @@ export default class movesTab extends React.Component<MyProps, MyState> {
     render() {
     const show_moves = this.state.moves.map((item, i) => {
         return (
-          <Accordion key={i} expanded={this.state.expanded === i} onChange={()=>{this.changePanel(i)}}>
+          <Accordion key={i} expanded={this.state.expanded === i} >
             <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                <Grid container justifyContent="space-between">
-                    <Grid>{item.title.value} </Grid>
+                <Grid container justifyContent="space-between" >
+                    <Grid onClick={()=>{this.changePanel(i)}}  width={"95%"}>{item.title.value} </Grid>
                     <Grid>
-                      <EditIcon onClick={()=>this.DialogOpen(i)}/>
+                      <EditIcon onClick={()=>this.DialogOpen(i)} sx={{color:"blue"}}/>
                       <CloseIcon  onClick={()=>this.removeMove(i)} sx={{color:"red"}}/>
                     </Grid>
                 </Grid>
