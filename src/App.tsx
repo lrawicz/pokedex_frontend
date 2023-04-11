@@ -4,6 +4,11 @@ import Box from '@mui/material/Box';
 
 export default function App() {
   return (
+    <html>
+    <head>
+    <script src="http://localhost:8097"></script>
+    </head>
     <Base />
+    </html>
   );
 }

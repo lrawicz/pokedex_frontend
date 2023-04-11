@@ -13,6 +13,7 @@ import AutoFixHigh from '@mui/icons-material/AutoFixHigh';
 import {  TypeAbility,  ClassMove, ClassStats} from '../../Interface'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 //import update from 'react-addons-update'; // ES6
+import GppMaybeIcon from '@mui/icons-material/GppMaybe';
 
 interface TabPanelProps {
  children?: React.ReactNode;
@@ -117,7 +118,8 @@ export default class Filters extends React.Component<MyProps, MyState> {
         <Tab label="Stats"  icon={<AlignHorizontalLeftIcon/>}   {...this.a11yProps(1)} />
         <Tab  label="Ability" icon={<AutoFixHigh/>} {...this.a11yProps(2)}/>
         <Tab label="Moves" icon={<SportsMmaIcon/>} {...this.a11yProps(3)} />
-        <Tab label="Misc" icon={<MoreHorizIcon/>} {...this.a11yProps(4)} />
+        <Tab label="Defensive" icon={<GppMaybeIcon/>} {...this.a11yProps(4)} />
+        <Tab label="Misc" icon={<MoreHorizIcon/>} {...this.a11yProps(5)} />
       </Tabs>
     </Box>
     <this.TabPanel value={this.state.value} index={0}>
@@ -133,7 +135,10 @@ export default class Filters extends React.Component<MyProps, MyState> {
      <MovesTab sendToParent={this.getMovesData} moves={this.state.moves}/>
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={4}>
-      Misc
+      Defensive Data
+    </this.TabPanel>
+    <this.TabPanel value={this.state.value} index={5}>
+      Misc.
     </this.TabPanel>
   </Box>
   )}

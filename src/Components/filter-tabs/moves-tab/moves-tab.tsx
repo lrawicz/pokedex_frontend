@@ -117,6 +117,8 @@ export default class movesTab extends React.Component<MyProps, MyState> {
       this.setState({
         moves:temp_moves
       })
+      this.setState({expanded:indexMove})
+      //this.forceUpdate();
     }
     addMove(){
       let temp_move = new ClassMove
@@ -128,7 +130,9 @@ export default class movesTab extends React.Component<MyProps, MyState> {
       })
       this.props.sendToParent(this.state.moves)
     }
-    test(){}
+    test(){
+
+    }
     //
     render() {
     const show_moves = this.state.moves.map((item, i) => {
@@ -137,15 +141,15 @@ export default class movesTab extends React.Component<MyProps, MyState> {
             <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                 <Grid container justifyContent="space-between">
                     <Grid>{item.title.value} </Grid>
-                    <Grid><CloseIcon  onClick={()=>this.removeMove(i)} sx={{color:"red"}}/></Grid>
+                    <Grid>
+                      <EditIcon onClick={()=>this.DialogOpen(i)}/>
+                      <CloseIcon  onClick={()=>this.removeMove(i)} sx={{color:"red"}}/>
+                    </Grid>
                 </Grid>
             </AccordionSummary>
             <AccordionDetails>
-            <Fab  aria-label="edit">
-              <EditIcon onClick={()=>this.DialogOpen(i)}/>
-            </Fab>
 
-            <MovesDialog sendToParent={this.test} dialogOpen={false} move={item}/>
+            <MovesDialog sendToParent={this.test} move={item}/>
 
               {/*names*/}
               {(item.names.enable===true)?
