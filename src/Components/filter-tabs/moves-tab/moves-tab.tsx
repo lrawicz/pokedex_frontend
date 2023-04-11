@@ -7,7 +7,7 @@ import MuiAccordionSummary, {
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { ClassMove,TypeMoveProperties } from '../../../Interface';
+import { ClassMove,TypeMoveData,moveProperty } from '../../../Interface';
 import CloseIcon from '@mui/icons-material/Close';
 
 import ComboBoxTags from '../../combo-box-tags/combo-box-tags'
@@ -99,19 +99,19 @@ export default class movesTab extends React.Component<MyProps, MyState> {
         this.props.sendToParent(this.state.moves)
     }
 
-    getData(prop:keyof ClassMove,data:any,moveIndex?:number, enable?:boolean){
+    getData(prop:TypeMoveData,data:any,moveIndex?:number, enable?:boolean){
         if (typeof(moveIndex) !== "number"){return}
         let temp_move:ClassMove = this.state.moves[moveIndex]
         let temp_moves:ClassMove[] = this.state.moves
-        temp_move[prop as keyof ClassMove].value = data
-        temp_moves[moveIndex] =  temp_move
-        this.setState({moves: temp_moves})
-        this.props.sendToParent(this.state.moves)
+          temp_move[prop]["value"] = data
+          temp_moves[moveIndex] =  temp_move
+          this.setState({moves: temp_moves})
+          this.props.sendToParent(this.state.moves)
       }
     DialogOpen(indexMove:number){
       let temp_move:ClassMove =  this.state.moves[indexMove]
       let temp_moves:ClassMove[] =  this.state.moves
-      temp_move.dialog.value = true
+      temp_move.dialog = true
       temp_moves[indexMove] = temp_move
       this.setState({
         moves:temp_moves
@@ -122,7 +122,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
     addMove(){
       let temp_move = new ClassMove
       let temp_moves = this.state.moves
-      temp_move.title.value = (this.state.moves.length +1).toString()
+      temp_move.title = (this.state.moves.length +1).toString()
       temp_moves.push(temp_move)
       this.setState({
         moves: temp_moves
@@ -139,7 +139,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
           <Accordion key={i} expanded={this.state.expanded === i} >
             <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                 <Grid container justifyContent="space-between" >
-                    <Grid onMouseDown={()=>{this.changePanel(i)}}  width={"95%"}>{item.title.value} </Grid>
+                    <Grid onMouseDown={()=>{this.changePanel(i)}}  width={"95%"}>{item.title} </Grid>
                     <Grid >
                       <EditIcon onClick={()=>this.DialogOpen(i)} sx={{color:"blue"}}/>
                       <CloseIcon  onClick={()=>this.removeMove(i)} sx={{color:"red"}}/>

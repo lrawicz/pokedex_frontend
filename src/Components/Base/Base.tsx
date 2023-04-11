@@ -134,7 +134,7 @@ export default function SecondComponent() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Generations
+            Generations: 01 / 02 / 03 / 04 / 05 / 06 / 07 / 08
           </Typography>
         </Toolbar>
       </AppBar>

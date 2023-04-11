@@ -39,9 +39,9 @@ export default class Filters extends React.Component<MyProps, MyState> {
   constructor(props:MyProps){
     super(props)
     let move01:ClassMove = new ClassMove()
-    move01.title.value= "01"
+    move01.title= "01"
     let move02:ClassMove = new ClassMove()
-    move02.title.value= "02"
+    move02.title= "02"
     this.state ={
       tabsArray: [true,true,true,true,true],
       value:0,

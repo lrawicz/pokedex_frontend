@@ -26,7 +26,7 @@ export default class SimpleDialog extends Component<MyProps, MyState> {
     }
     dialogClose = () => {
         let temp_move = this.state.move
-        temp_move.dialog.value = false
+        temp_move.dialog = false
         this.setState({
             move: temp_move
         })
@@ -41,7 +41,7 @@ export default class SimpleDialog extends Component<MyProps, MyState> {
     render(){
         //this.state.move[entry as keyof typeof this.state.move].
         return (
-          <Dialog maxWidth='xl' onClose={this.dialogClose} open={this.state.move.dialog.value}>
+          <Dialog maxWidth='xl' onClose={this.dialogClose} open={this.state.move.dialog}>
             <DialogTitle width={"300px"}>Config</DialogTitle>
               { Object.keys(this.state.move).map((entry:string) => (
                 <Chip 
