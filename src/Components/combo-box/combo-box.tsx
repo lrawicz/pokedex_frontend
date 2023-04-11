@@ -53,11 +53,11 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                    <Grid item >
+                    <Grid item xs={1}>
                         <h3>{this.state.name}:</h3>
                     </Grid>
 
-                    <Grid item xs={6} >
+                    <Grid item xs={5} >
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">{this.state.name}</InputLabel>
                             <Select

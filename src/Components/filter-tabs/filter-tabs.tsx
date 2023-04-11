@@ -8,7 +8,7 @@ import AbiltiesTab from './abilities-tab/abilities-tab';
 import MovesTab from './moves-tab/moves-tab';
 
 
-import { TypeStats, TypeMinMax, TypeAbility, TypeMove, ClassMove} from '../../Interface'
+import {  TypeAbility,  ClassMove, ClassStats} from '../../Interface'
 
 //import update from 'react-addons-update'; // ES6
 
@@ -24,52 +24,34 @@ type MyProps={
 type MyState ={
   tabsArray: boolean[], 
   value: number,
-  stats: TypeStats
+  stats: ClassStats
   abilityOptions: TypeAbility,
   abilitySelected: TypeAbility,
-  moves: TypeMove[]
+  moves: ClassMove[]
 
 
 }
 export default class Filters extends React.Component<MyProps, MyState> {
-  stats:TypeStats
-  stats_initial_value:TypeMinMax
 
   constructor(props:MyProps){
     super(props)
-    this.stats_initial_value={"min":0,"max":100}
-    this.stats={
-      hp:this.stats_initial_value,
-      attack:this.stats_initial_value,
-      specialAttack: this.stats_initial_value,
-      defense:this.stats_initial_value,
-      specialDefense: this.stats_initial_value,
-      speed: this.stats_initial_value
-    }
     let move01:ClassMove = new ClassMove()
-    move01.title= "01"
+    move01.title.value= "01"
     let move02:ClassMove = new ClassMove()
-    move02.title= "02"
+    move02.title.value= "02"
     this.state ={
       tabsArray: [true,true,true,true,true],
       value:0,
-      stats:{
-        "hp":{"min":0,"max":255},
-        "attack":{"min":0,"max":255},
-        "defense":{"min":0,"max":255},
-        "specialAttack":{"min":0,"max":255},
-        "specialDefense":{"min":0,"max":255},
-        "speed":{"min":0,"max":255}
-      },
+      stats: new ClassStats(),
       abilityOptions:{
-        "trigger": ["trigger01","trigger02","trigger03"],
-        "target": ["asd2"],
-        "effect": ["asd3"]
+        trigger: ["trigger01","trigger02","trigger03"],
+        target: ["asd2"],
+        effect: ["asd3"]
       },
       abilitySelected:{
-        "trigger": [],
-        "target": [],
-        "effect": []
+        trigger: [],
+        target: [],
+        effect: []
       },
       moves:[move01,move02]
     }
@@ -115,13 +97,13 @@ export default class Filters extends React.Component<MyProps, MyState> {
       value: this.state.value
     })
   }
-  getStatData = (data:TypeStats) =>{
+  getStatData = (data:ClassStats) =>{
     this.setState({stats: data});
   }
   getAbilityData = (data:TypeAbility) =>{
     this.setState({abilitySelected: data});
   }
-  getMovesData = (data:TypeMove[]) =>{
+  getMovesData = (data:ClassMove[]) =>{
     this.setState({moves: data});
   }
   render() { return (

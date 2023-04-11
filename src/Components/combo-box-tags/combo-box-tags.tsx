@@ -48,10 +48,10 @@ export default class ComboBoxTags extends React.Component<MyProps, MyState> {
     render() {
 
         return (
-            <Box sx={{ minWidth: 120 }}>
+            <Box sx={{ minWidth: "100%" }}>
             <Grid container justifyContent="center">
-                <Grid item xs={2}><h3>{this.state.label}:</h3></Grid>
-                <Grid item xs={5}>
+                <Grid item xs={3}><h3>{this.state.label}:</h3></Grid>
+                <Grid item xs={4}>
                     <Autocomplete
                     multiple
                     id={this.state.name}
