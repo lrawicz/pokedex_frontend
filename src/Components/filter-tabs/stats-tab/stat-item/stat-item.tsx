@@ -44,7 +44,6 @@ export default class StatItem extends React.Component<MyProps, MyState>
       value: [props.value.min,props.value.max]
     }
     if (this.state.name =="hp"){
-      console.log(props)
     }
     this.handleChange = this.handleChange.bind(this);
   }

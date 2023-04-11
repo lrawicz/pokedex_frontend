@@ -8,7 +8,7 @@ import AbiltiesTab from './abilities-tab/abilities-tab';
 import MovesTab from './moves-tab/moves-tab';
 
 
-import { TypeStats, TypeMinMax, TypeAbility, TypeMove} from '../../Interface'
+import { TypeStats, TypeMinMax, TypeAbility, TypeMove, ClassMove} from '../../Interface'
 
 //import update from 'react-addons-update'; // ES6
 
@@ -46,6 +46,10 @@ export default class Filters extends React.Component<MyProps, MyState> {
       specialDefense: this.stats_initial_value,
       speed: this.stats_initial_value
     }
+    let move01:ClassMove = new ClassMove()
+    move01.title= "01"
+    let move02:ClassMove = new ClassMove()
+    move02.title= "02"
     this.state ={
       tabsArray: [true,true,true,true,true],
       value:0,
@@ -67,7 +71,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
         "target": [],
         "effect": []
       },
-      moves:[{title:"01"},{title:"02"}]
+      moves:[move01,move02]
     }
     //const [tabsArray, setTabsArray] = useState([true,true,true,true,true]);
     //const [value, setValue] = React.useState(0);
@@ -76,7 +80,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
     const { children, value, index, ...other } = props;
   
     return (
-      <div
+      <Box
         role="tabpanel"
         hidden={value !== index}
         id={`simple-tabpanel-${index}`}
@@ -85,10 +89,10 @@ export default class Filters extends React.Component<MyProps, MyState> {
       >
         {value === index && (
           <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+            {children}
           </Box>
         )}
-      </div>
+      </Box>
     );
   }
   a11yProps(index: number) {

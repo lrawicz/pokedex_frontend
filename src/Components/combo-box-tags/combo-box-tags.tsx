@@ -13,33 +13,36 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 type MyProps={
     sendToParent:any,
     items:string[],
-    selected:string[],
+    value:string[],
     name: string,
-    label: string
-
+    label: string,
+    moveIndex?:number
   }
 type MyState ={
     items:string[],
-    selected:string[],
+    value:string[],
     name: string,
-    label: string
+    label: string,
+    moveIndex?:number| undefined
+
 }
 export default class ComboBoxTags extends React.Component<MyProps, MyState> {
     constructor(props:MyProps){
         super(props)
+        let temp_moveIndex = typeof(this.props.moveIndex)== "number"?  this.props.moveIndex:undefined
         this.state = {
             items:this.props.items,
-            selected:this.props.selected,
+            value:this.props.value,
             name: this.props.name,
-            label: this.props.label
+            label: this.props.label,
+            moveIndex: temp_moveIndex
         }
     }
-    OnChange=(event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails)=>{
-        console.log(event)
+    OnChange=(event: React.SyntheticEvent<Element,Event>, tmp_value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails)=>{
         this.setState({
-            selected: value
+            value: tmp_value
         })
-        this.props.sendToParent(this.state.name,this.state.selected)
+        this.props.sendToParent(this.state.name, tmp_value, this.state.moveIndex)
     }
 
     render() {
@@ -54,7 +57,7 @@ export default class ComboBoxTags extends React.Component<MyProps, MyState> {
                     id={this.state.name}
                     onChange={this.OnChange}
                     options={this.state.items}
-                    defaultValue={this.state.selected}
+                    value={this.state.value}
                     disableCloseOnSelect
                     getOptionLabel={(option) => option} 
                     renderOption={(props, option, { selected }) => (

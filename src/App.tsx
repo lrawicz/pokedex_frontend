@@ -1,11 +1,9 @@
 import './App.css';
 import Base from './Components/Base/Base';
-function App() {
+import Box from '@mui/material/Box';
+
+export default function App() {
   return (
-    <div className="App">
-      <Base />
-    </div>
+    <Base />
   );
 }
-
-export default App;

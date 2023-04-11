@@ -11,31 +11,33 @@ type MyProps={
     items:string[],
     selectedValue:string | undefined,
     name: string,
-    label: string
+    label: string,
+    moveIndex?: number| undefined
   }
 type MyState ={
     items:string[],
     selectedValue:string| undefined,
     name: string,
-    label: string
-
+    label: string,
+    moveIndex: number| undefined
 }
 export default class ComboBox extends React.Component<MyProps, MyState> {
     constructor(props:MyProps){
         super(props)
+        let temp_moveIndex = typeof(this.props.moveIndex)== "number"?  this.props.moveIndex:undefined
         this.state = {
             items:this.props.items,
             selectedValue:this.props.selectedValue,
             name: this.props.name,
-            label: this.props.label
+            label: this.props.label,
+            moveIndex: temp_moveIndex
         }
     }
     handleChange=(event:SelectChangeEvent<string>,child:React.ReactNode)=>{
-        console.log(event)
         this.setState({
             selectedValue: event.target.value
         })
-        this.props.sendToParent(this.state.name, this.state.selectedValue)
+        this.props.sendToParent(this.state.name, this.state.selectedValue, this.state.moveIndex)
     }
 
     render() {

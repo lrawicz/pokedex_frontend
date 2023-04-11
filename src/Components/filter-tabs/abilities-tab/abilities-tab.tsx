@@ -37,9 +37,6 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   abilityOnChange(
     event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, ID: ("trigger" | "effect" | "target"), details?: AutocompleteChangeDetails)
     {
-      console.log("value:")
-      console.log(value)
-      console.log("ID:" + ID)
       let temp_ability:TypeAbility
       temp_ability = this.state.abilitySelected
       temp_ability[ID] = value
