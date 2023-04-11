@@ -6,10 +6,12 @@ import Box from '@mui/material/Box';
 import StatsTab from './stats-tab/stats-tab';
 import AbiltiesTab from './abilities-tab/abilities-tab';
 import MovesTab from './moves-tab/moves-tab';
-
-
+import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
+import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
+import SportsMmaIcon from '@mui/icons-material/SportsMma';
+import AutoFixHigh from '@mui/icons-material/AutoFixHigh';
 import {  TypeAbility,  ClassMove, ClassStats} from '../../Interface'
-
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 //import update from 'react-addons-update'; // ES6
 
 interface TabPanelProps {
@@ -111,11 +113,11 @@ export default class Filters extends React.Component<MyProps, MyState> {
 
     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
       <Tabs value={this.state.value} onChange={this.handleChange}  aria-label="basic tabs example">
-        <Tab label="Data"  {... this.a11yProps(0)} />
-        <Tab label="Stats"   {...this.a11yProps(1)} />
-        <Tab label="Ability"  {...this.a11yProps(2)} />
-        <Tab label="Moves"  {...this.a11yProps(3)} />
-        <Tab label="Misc"  {...this.a11yProps(4)} />
+        <Tab label="General" icon={<CatchingPokemonIcon/>}  {... this.a11yProps(0)} />
+        <Tab label="Stats"  icon={<AlignHorizontalLeftIcon/>}   {...this.a11yProps(1)} />
+        <Tab  label="Ability" icon={<AutoFixHigh/>} {...this.a11yProps(2)}/>
+        <Tab label="Moves" icon={<SportsMmaIcon/>} {...this.a11yProps(3)} />
+        <Tab label="Misc" icon={<MoreHorizIcon/>} {...this.a11yProps(4)} />
       </Tabs>
     </Box>
     <this.TabPanel value={this.state.value} index={0}>
