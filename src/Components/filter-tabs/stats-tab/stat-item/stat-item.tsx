@@ -2,13 +2,13 @@ import * as React from 'react';
 import Slider from '@mui/material/Slider';
 import Grid from '@mui/material/Grid';
 import './stat-item.css';
-import {TypeMinMax, TypeStatsNames} from '../../../../Interface'
+import { TypeStatsNames} from '../../../../Interface'
 
 
 type MyProps={
   sendToParent:any,
   name: TypeStatsNames,
-  value:TypeMinMax
+  value:number[]
 }
 type MyState ={
   name:string,
@@ -41,9 +41,9 @@ export default class StatItem extends React.Component<MyProps, MyState>
     //Specific
     this.state = {
       name: props.name,
-      value: [props.value.min,props.value.max]
+      value: props.value
     }
-    if (this.state.name =="hp"){
+    if (this.state.name ==="hp"){
     }
     this.handleChange = this.handleChange.bind(this);
   }
