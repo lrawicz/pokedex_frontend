@@ -3,11 +3,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { forEachChild } from 'typescript';
 import StatsTab from './stats-tab/stats-tab';
 import AbiltiesTab from './abilities-tab/abilities-tab';
+import MovesTab from './moves-tab/moves-tab';
 
-import { TypeStats, TypeStatValues, TypeAbility} from '../../Interface'
+
+import { TypeStats, TypeMinMax, TypeAbility, TypeMove} from '../../Interface'
 
 //import update from 'react-addons-update'; // ES6
 
@@ -24,13 +25,15 @@ type MyState ={
   tabsArray: boolean[], 
   value: number,
   stats: TypeStats
-  abilityOptions: TypeAbility
-  abilitySelected: TypeAbility
+  abilityOptions: TypeAbility,
+  abilitySelected: TypeAbility,
+  moves: TypeMove[]
+
 
 }
 export default class Filters extends React.Component<MyProps, MyState> {
   stats:TypeStats
-  stats_initial_value:TypeStatValues
+  stats_initial_value:TypeMinMax
 
   constructor(props:MyProps){
     super(props)
@@ -63,7 +66,8 @@ export default class Filters extends React.Component<MyProps, MyState> {
         "trigger": [],
         "target": [],
         "effect": []
-      }
+      },
+      moves:[{title:"01"},{title:"02"}]
     }
     //const [tabsArray, setTabsArray] = useState([true,true,true,true,true]);
     //const [value, setValue] = React.useState(0);
@@ -101,7 +105,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
   }
   tabOnClick = (event: React.SyntheticEvent,index:number) => {
     let temp_array =  this.state.tabsArray
-    temp_array [index] = !temp_array [index]
+    temp_array[index] = !temp_array[index]
     this.setState({
       tabsArray:  temp_array,
       value: this.state.value
@@ -112,6 +116,9 @@ export default class Filters extends React.Component<MyProps, MyState> {
   }
   getAbilityData = (data:TypeAbility) =>{
     this.setState({abilitySelected: data});
+  }
+  getMovesData = (data:TypeMove[]) =>{
+    this.setState({moves: data});
   }
   render() { return (
     <Box sx={{ width: '100%' }}>
@@ -135,7 +142,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
       <AbiltiesTab abilityOptions={this.state.abilityOptions} abilitySelected={this.state.abilitySelected} sendToParent={this.getAbilityData} />
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={3}>
-      Moves
+     <MovesTab sendToParent={this.getMovesData} moves={this.state.moves}/>
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={4}>
       Misc

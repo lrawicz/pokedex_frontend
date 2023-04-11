@@ -2,13 +2,13 @@ import * as React from 'react';
 import Slider from '@mui/material/Slider';
 import Grid from '@mui/material/Grid';
 import './stat-item.css';
-import {TypeStatValues, TypeStatsNames} from '../../../../Interface'
+import {TypeMinMax, TypeStatsNames} from '../../../../Interface'
 
 
 type MyProps={
   sendToParent:any,
   name: TypeStatsNames,
-  value:TypeStatValues
+  value:TypeMinMax
 }
 type MyState ={
   name:string,

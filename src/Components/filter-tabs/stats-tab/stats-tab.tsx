@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { TypeStats, TypeStatValues,TypeStatsNames} from '../../../Interface'
+import { TypeStats, TypeMinMax,TypeStatsNames} from '../../../Interface'
 import StatItem from './stat-item/stat-item'
 
 type MyProps={
@@ -19,7 +19,7 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
       stats: props.stats
     }
   }
-  getStatData = (statName:TypeStatsNames,statValues:TypeStatValues) => {
+  getStatData = (statName:TypeStatsNames,statValues:TypeMinMax) => {
     let newStats:TypeStats
     newStats = this.state.stats
     newStats[statName] = statValues
