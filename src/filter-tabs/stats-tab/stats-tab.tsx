@@ -38,37 +38,37 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
                   min={0} max={255} step={5} minDistance={0}
                   sendToParent={this.getStatData}
                   value={this.state.stats.hp}
-                  marks={[{value:130,label:"130"}]}/>
+                  marks={[100,130]}/>
 
       <RangerBar  name="attack" label='Attack'
                   min={0} max={255} step={5} minDistance={0}
                   sendToParent={this.getStatData}
                   value={this.state.stats.attack}
-                  marks={[{value:130,label:"130"}]}/>
+                  marks={[100,130]}/>
 
       <RangerBar  name="defense" label='Defense'
                   min={0} max={255} step={5} minDistance={0}
                   sendToParent={this.getStatData}
                   value={this.state.stats.defense}
-                  marks={[{value:130,label:"130"}]}/>
+                  marks={[100,130]}/>
 
       <RangerBar  name="specialAttack" label='Special Attack'
                   min={0} max={255} step={5} minDistance={0}
                   sendToParent={this.getStatData}
                   value={this.state.stats.specialAttack}
-                  marks={[{value:130,label:"130"}]}/>
+                  marks={[100,130]}/>
 
       <RangerBar  name="specialDefense" label='Special Defense'
                   min={0} max={255} step={5} minDistance={0}
                   sendToParent={this.getStatData}
                   value={this.state.stats.specialDefense}
-                  marks={[{value:130,label:"130"}]}/>
+                  marks={[100,130]}/>
 
       <RangerBar  name="speed" label='Speed'
                   min={0} max={255} step={5} minDistance={0}
                   sendToParent={this.getStatData}
                   value={this.state.stats.speed}
-                  marks={[{value:130,label:"130"}]}/>
+                  marks={[100,130]}/>
       </Paper>
       </Box>
   );}

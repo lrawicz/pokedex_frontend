@@ -14,7 +14,7 @@ type MyProps={
     value:number[],
     name: string,
     label: string,
-    marks: mark[],
+    marks: number[],
     step: number,
     minDistance: number,
     moveIndex?:number| undefined
@@ -36,13 +36,20 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
     constructor(props:MyProps){
         super(props)
         let temp_moveIndex = typeof(this.props.moveIndex)== "number"?  this.props.moveIndex:undefined
+        let temp_marks:mark[] = []
+        temp_marks.push({value:this.props.min,label:this.props.min.toString()})
+        this.props.marks.forEach(element => {
+          temp_marks.push({value:element,label:element.toString()})
+        });
+        temp_marks.push({value:this.props.max,label:this.props.max.toString()})
+
         this.state = {
             value: this.props.value,
             min: this.props.min,
             max: this.props.max,
             name: this.props.name,
             label: this.props.label,
-            marks: [{value:this.props.min,label:this.props.min.toString()}, ...this.props.marks,{value:this.props.max,label:this.props.max.toString()}],
+            marks: temp_marks,
             step: this.props.step,
             minDistance: this.props.minDistance,
             moveIndex:temp_moveIndex

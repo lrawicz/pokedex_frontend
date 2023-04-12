@@ -213,11 +213,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
                 <RangeBar moveIndex={i} label='power' name='power'
                 min={0} max={255} step={5} minDistance={0}
                 value={item.data.power.value}
-                marks={[
-                        {label:"40", value:40},{label:"60", value:60},
-                        {label:"80", value:80},{label:"100", value:100},
-                        {label:"120", value:120},{label:"150", value:150}
-                ]}
+                marks={[40,80,100,120,150]}
                 sendToParent={this.getData}/>
               :null}
 
@@ -225,7 +221,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               {(item.data.priority.enable===true)?
                 <RangeBar moveIndex={i} label='priority' name='priority'
                 min={-7} max={5} step={1} minDistance={0}
-                marks={[{label:"0", value:0}]}
+                marks={[0]}
                 value={item.data.priority.value}
                 sendToParent={this.getData}/>
               :null}
@@ -235,7 +231,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
                 <RangeBar moveIndex={i} label='Accuracy'  name='accuracy'
                 min={0} max={100} step={5} minDistance={0}
                 value={item.data.accurrency.value}
-                marks={[{label:"70", value:70}]}
+                marks={[70]}
                 sendToParent={this.getData}/>
               :null}
 
@@ -244,10 +240,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
                 <RangeBar moveIndex={i} label='change state'  name='changeState'
                 min={-6} max={6} step={1} minDistance={0}
                 value={item.data.changeState.value}
-                marks={[
-                  {label:"-2", value:-2},{label:"-1", value:-1},
-                  {label:"1", value:1},{label:"2", value:2}
-                ]}
+                marks={[-2,-1,1,2]}
                 sendToParent={this.getData}/>
               :null}
 
@@ -255,7 +248,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               {(item.data.effectChance.enable===true)?
                 <RangeBar moveIndex={i} label='effect chance' name='effectChance'
                 min={0} max={100} step={5} minDistance={0}
-                marks={[{label:"50", value:50},{label:"70", value:70}]}
+                marks={[50,70]}
                 value={item.data.effectChance.value}
                 sendToParent={this.getData}/>
               :null}
