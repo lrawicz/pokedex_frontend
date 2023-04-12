@@ -18,7 +18,6 @@ export let MovesLabel = {
   power: "Power",
   priority: "Priority",
   accurrency: "Accurrency",
-  changeState: "Change State",
   effectChance: "Effect Chance",
   statusEffect: "Status Effect",
   category: "Category"
@@ -32,7 +31,6 @@ export class ClassMoveData {
   power:{value:number[], enable:boolean}  = {value:[0,255], enable:true}
   priority:{value:number[], enable:boolean} = {value:[-7,5],enable:false}
   accurrency:{value:number[], enable:boolean} ={value:[0,100],enable:false}
-  changeState:{value:number[], enable:boolean} ={value:[0,100],enable:false}
   effectChance:{value:number[], enable:boolean} ={value:[0,100],enable:false}
   statusEffect:{value:string[],enable:boolean}  ={value:[],enable:false}
   category:{value:string[],enable:boolean} = {value:[],enable:false}
@@ -53,5 +51,5 @@ export class ClassStats{
   speed:number[] = [0,255]
 }
 
-export type TypeMoveData = "names"|"damageClass"|"types"|"target"|"power"|"priority"|"accurrency"|"changeState"|"effectChance"|"statusEffect"|"category"
+export type TypeMoveData = keyof ClassMoveData
 export type TypeStatsNames =  keyof ClassStats

@@ -10,8 +10,6 @@ import Typography from '@mui/material/Typography';
 import { ClassMove,TypeMoveData,moveProperty } from '../../Interface';
 import CloseIcon from '@mui/icons-material/Close';
 
-import ComboBoxTags from '../../Components/combo-box-tags/combo-box-tags'
-import RangeBar from '../../Components/range-bar/range-bar'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -20,7 +18,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
+
+//Icons
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+// Own:
+import RangeBar from '../../Components/range-bar/range-bar'
+import ComboBoxTags from '../../Components/combo-box-tags/combo-box-tags'
 import MovesDialog from './moves-dialog'
+
+
 const Accordion = styled((props: AccordionProps) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
   ))(({ theme }) => ({
@@ -91,21 +98,21 @@ export default class movesTab extends React.Component<MyProps, MyState> {
             posibleTypes: []
           }
         }
-        componentDidMount() {
-          fetch("https://pokeapi.co/api/v2/type")
-            .then(response => {
-              return response.json()
-            })
-            .then(data => {
-              let tmp_type: string[] = []
-              data.results.forEach((element: any) => {
-                tmp_type.push(element.name)
-              })
-              this.setState((prevState) => ({
-                posibleTypes: [...prevState.posibleTypes, ...tmp_type]
-              }))
-            })
-        }
+    componentDidMount() {
+      fetch("https://pokeapi.co/api/v2/type")
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          let tmp_type: string[] = []
+          data.results.forEach((element: any) => {
+            tmp_type.push(element.name)
+          })
+          this.setState((prevState) => ({
+            posibleTypes: [...prevState.posibleTypes, ...tmp_type]
+          }))
+        })
+    }
 
     changePanel(panelID: number){
         if (panelID === this.state.expanded){
@@ -235,14 +242,6 @@ export default class movesTab extends React.Component<MyProps, MyState> {
                 sendToParent={this.getData}/>
               :null}
 
-              {/*changeState*/}
-              {(item.data.changeState.enable===true)?
-                <RangeBar moveIndex={i} label='change state'  name='changeState'
-                min={-6} max={6} step={1} minDistance={0}
-                value={item.data.changeState.value}
-                marks={[-2,-1,1,2]}
-                sendToParent={this.getData}/>
-              :null}
 
               {/*changeState*/}
               {(item.data.effectChance.enable===true)?
@@ -275,7 +274,19 @@ export default class movesTab extends React.Component<MyProps, MyState> {
     return (
         <Box>
             {show_moves}
-            <Button onClick={this.addMove} variant="contained">add move</Button>
+            <Accordion onClick={this.addMove} key={99} expanded={false} >
+            <AccordionSummary sx={{ backgroundColor: "#1976d2"}}
+              expandIcon={<AddCircleIcon />} 
+              color="secondary" 
+              aria-controls="panel1d-content" 
+              id="panel1d-header">
+                <Grid    container justifyContent="space-between" >
+                    <Grid   color={"white"} width={"95%"}>New Move </Grid>
+                </Grid>
+            </AccordionSummary>
+            <AccordionDetails>
+            </AccordionDetails>
+            </Accordion>
         </Box>
   )}
 }

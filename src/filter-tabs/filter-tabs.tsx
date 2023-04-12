@@ -1,20 +1,20 @@
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import StatsTab from './stats-tab/stats-tab';
-import AbiltiesTab from './abilities-tab/abilities-tab';
-import MovesTab from './moves-tab/moves-tab';
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import SportsMmaIcon from '@mui/icons-material/SportsMma';
 import AutoFixHigh from '@mui/icons-material/AutoFixHigh';
-import {  TypeAbility,  ClassMove, ClassStats} from '../Interface'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-//import update from 'react-addons-update'; // ES6
 import GppMaybeIcon from '@mui/icons-material/GppMaybe';
-
+// Own:
+import {  TypeAbility,  ClassMove, ClassStats} from '../Interface'
+import StatsTab from './stats/stats';
+import AbiltiesTab from './abilities/abilities';
+import MovesTab from './moves/moves';
+import PokemonTab from './general/general'
+import { GeneralData } from './general/interface';
 interface TabPanelProps {
  children?: React.ReactNode;
  index: number;
@@ -30,8 +30,8 @@ type MyState ={
   stats: ClassStats
   abilityOptions: TypeAbility,
   abilitySelected: TypeAbility,
-  moves: ClassMove[]
-
+  moves: ClassMove[],
+  general: GeneralData
 
 }
 export default class Filters extends React.Component<MyProps, MyState> {
@@ -56,7 +56,8 @@ export default class Filters extends React.Component<MyProps, MyState> {
         target: [],
         effect: []
       },
-      moves:[move01,move02]
+      moves:[move01,move02],
+      general: new GeneralData()
     }
     //const [tabsArray, setTabsArray] = useState([true,true,true,true,true]);
     //const [value, setValue] = React.useState(0);
@@ -109,6 +110,9 @@ export default class Filters extends React.Component<MyProps, MyState> {
   getMovesData = (data:ClassMove[]) =>{
     this.setState({moves: data});
   }
+  getGeneralData = (data:GeneralData) =>{
+    this.setState({general: data});
+  }
   render() { return (
     <Box sx={{ width: '100%' }}>
 
@@ -123,7 +127,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
       </Tabs>
     </Box>
     <this.TabPanel value={this.state.value} index={0}>
-      FilterPokemon
+      <PokemonTab data={this.state.general} sendToParent={this.getStatData}/>
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={1} >
       <StatsTab sendToParent={this.getStatData} stats={this.state.stats }/>

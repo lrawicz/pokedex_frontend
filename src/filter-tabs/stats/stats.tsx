@@ -12,7 +12,7 @@ type MyState ={
   stats:ClassStats
 }
 export default class StatsTab extends React.Component<MyProps, MyState>{
-  constructor(props:any){ 
+  constructor(props:MyProps){ 
     super(props)
     this.getStatData = this.getStatData.bind(this);
     this.state = {
