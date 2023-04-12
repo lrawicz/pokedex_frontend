@@ -37,8 +37,7 @@ export class ClassMoveData {
   statusEffect:{value:string[],enable:boolean}  ={value:[],enable:false}
   category:{value:string[],enable:boolean} = {value:[],enable:false}
 }
-export type TypeMoveDataProp = (key in keyof ClassMoveData)
-export a interface: ()
+export type TypeMoveDataProp =  keyof ClassMoveData
 
 export class ClassMove {
   data: ClassMoveData = new ClassMoveData()

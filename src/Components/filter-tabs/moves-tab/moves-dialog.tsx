@@ -3,15 +3,17 @@ import { Component } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Chip from '@mui/material/Chip';
-import { ClassMove, TypeMoveData,ClassMoveData, TypeMoveDataProp } from '../../../Interface';
+import { ClassMove, TypeMoveData,ClassMoveData, TypeMoveDataProp,MovesLabel } from '../../../Interface';
 
 type MyProps={
     sendToParent:any,
-    move:ClassMove
+    move:ClassMove,
+    moveIndex:number
 
   }
 type MyState ={
     move:ClassMove
+    moveIndex:number
 }
 export default class SimpleDialog extends Component<MyProps, MyState> {
 
@@ -19,6 +21,7 @@ export default class SimpleDialog extends Component<MyProps, MyState> {
         super(props)
         this.state={
             move:this.props.move,
+            moveIndex:this.props.moveIndex,
         }
 
         //functions
@@ -32,6 +35,7 @@ export default class SimpleDialog extends Component<MyProps, MyState> {
         this.setState({
             move: temp_move
         })
+        this.props.sendToParent(temp_move,this.state.moveIndex)
     };
 
     CategoryClick = (key:string ) => {
@@ -40,28 +44,25 @@ export default class SimpleDialog extends Component<MyProps, MyState> {
       this.setState({
         move:temp_move
       })
+      this.props.sendToParent(temp_move,this.state.moveIndex)
     };
     render(){
         //this.state.move[entry as keyof typeof this.state.move].
+        let temp_moveData = new ClassMoveData()
+        let keys_moveData = Object.keys(temp_moveData)
+        let a = this.state.move.data[keys_moveData[0] as keyof typeof this.state.move.data].enable
         return (
           <Dialog maxWidth='xl' onClose={this.dialogClose} open={this.state.move.dialog}>
             <DialogTitle width={"300px"}>Config</DialogTitle>
-              { Object.keys(this.state.move.data).map((key) => (
-                        <Chip
-                        label={key}
-                        onClick={()=>this.CategoryClick(key)}
-                        />
-              ))}
+            {keys_moveData.map((key) => (
+                <Chip
+                label={MovesLabel[key as keyof typeof MovesLabel ]}
+                color={this.state.move.data[key as keyof typeof this.state.move.data].enable? "info":"secondary"}
+                //className={this.state.move.data[key as keyof typeof this.state.move.data].enable? "move-prop-active":"move-prop-inactive"}
+                onClick={()=>this.CategoryClick(key)}
+                />
+                ))}
           </Dialog>
         );
+      }
     }
-  }
-
-  /*
-        <Chip
-                label={key}
-                onClick={() => this.handleListItemClick(key)}
-                clickable
-                variant={key? "filled": "outlined"}
-                />
-                 */

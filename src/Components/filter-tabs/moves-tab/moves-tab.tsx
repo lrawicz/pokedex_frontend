@@ -84,6 +84,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
         this.addMove = this.addMove.bind(this);
         this.removeMove = this.removeMove.bind(this);
         this.DialogOpen = this.DialogOpen.bind(this);
+        this.changeConfig = this.changeConfig.bind(this);
     }
     changePanel(panelID: number){
         if (panelID === this.state.expanded){
@@ -103,7 +104,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
         if (typeof(moveIndex) !== "number"){return}
         let temp_move:ClassMove = this.state.moves[moveIndex]
         let temp_moves:ClassMove[] = this.state.moves
-          temp_move[prop]["value"] = data
+          temp_move.data[prop]["value"] = data
           temp_moves[moveIndex] =  temp_move
           this.setState({moves: temp_moves})
           this.props.sendToParent(this.state.moves)
@@ -120,7 +121,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
       //this.forceUpdate();
     }
     addMove(){
-      let temp_move = new ClassMove
+      let temp_move = new ClassMove()
       let temp_moves = this.state.moves
       temp_move.title = (this.state.moves.length +1).toString()
       temp_moves.push(temp_move)
@@ -129,8 +130,12 @@ export default class movesTab extends React.Component<MyProps, MyState> {
       })
       this.props.sendToParent(this.state.moves)
     }
-    test(){
-
+    changeConfig(data:ClassMove, index:number){
+      let temp_moves = this.state.moves
+      temp_moves[index] = data
+      this.setState({
+        moves: temp_moves
+      })
     }
     //
     render() {
@@ -148,45 +153,45 @@ export default class movesTab extends React.Component<MyProps, MyState> {
             </AccordionSummary>
             <AccordionDetails>
 
-            <MovesDialog sendToParent={this.test} move={item}/>
+            <MovesDialog sendToParent={this.changeConfig} move={item} moveIndex={i}/>
 
               {/*names*/}
-              {(item.names.enable===true)?
+              {(item.data.names.enable===true)?
                   <ComboBoxTags moveIndex={i} name='names' label='Names'
                   items={['baton-pass','follow-me']}
-                  value={item.names.value}
+                  value={item.data.names.value}
                   sendToParent={this.getData}/>
               :null}
 
               {/*damageClass*/}
-              {(item.damageClass.enable===true)?
+              {(item.data.damageClass.enable===true)?
                   <ComboBoxTags moveIndex={i} label='Damage class' name='damageClass'
                   items={['status','physical','special']}
-                  value={item.damageClass.value}
+                  value={item.data.damageClass.value}
                   sendToParent={this.getData}/>
               :null}
 
               {/*types*/}
-              {(item.types.enable===true)?
+              {(item.data.types.enable===true)?
                   <ComboBoxTags moveIndex={i} label='types' name='types'
                   items={["fire","water","grass"]}
-                  value={item.types.value}
+                  value={item.data.types.value}
                   sendToParent={this.getData}/>
               :null}
 
               {/*target*/}
-              {(item.target.enable===true)?
+              {(item.data.target.enable===true)?
                 <ComboBoxTags moveIndex={i} label='target' name='target'
                 items={["all-opponents","user"]}
-                value={item.target.value}
+                value={item.data.target.value}
                 sendToParent={this.getData}/>
               :null}
 
               {/*power*/}
-              {(item.power.enable===true)?
+              {(item.data.power.enable===true)?
                 <RangeBar moveIndex={i} label='power' name='power'
                 min={0} max={255} step={5} minDistante={0}
-                value={item.power.value}
+                value={item.data.power.value}
                 marks={[
                         {label:"40", value:40},{label:"60", value:60},
                         {label:"80", value:80},{label:"100", value:100},
@@ -196,28 +201,28 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               :null}
 
               {/*priority*/}
-              {(item.priority.enable===true)?
+              {(item.data.priority.enable===true)?
                 <RangeBar moveIndex={i} label='priority' name='priority'
                 min={-7} max={5} step={1} minDistante={0}
                 marks={[{label:"0", value:0}]}
-                value={item.priority.value}
+                value={item.data.priority.value}
                 sendToParent={this.getData}/>
               :null}
 
               {/*accuracy*/}
-              {(item.accurrency.enable===true)?
+              {(item.data.accurrency.enable===true)?
                 <RangeBar moveIndex={i} label='Accuracy'  name='accuracy'
                 min={0} max={100} step={5} minDistante={0}
-                value={item.accurrency.value}
+                value={item.data.accurrency.value}
                 marks={[{label:"70", value:70}]}
                 sendToParent={this.getData}/>
               :null}
 
               {/*changeState*/}
-              {(item.changeState.enable===true)?
+              {(item.data.changeState.enable===true)?
                 <RangeBar moveIndex={i} label='change state'  name='changeState'
                 min={-6} max={6} step={1} minDistante={0}
-                value={item.changeState.value}
+                value={item.data.changeState.value}
                 marks={[
                   {label:"-2", value:-2},{label:"-1", value:-1},
                   {label:"1", value:1},{label:"2", value:2}
@@ -226,27 +231,27 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               :null}
 
               {/*changeState*/}
-              {(item.changeState.enable===true)?
+              {(item.data.changeState.enable===true)?
                 <RangeBar moveIndex={i} label='effect chance' name='effectChance'
                 min={0} max={100} step={5} minDistante={0}
                 marks={[{label:"50", value:50},{label:"70", value:70}]}
-                value={item.changeState.value}
+                value={item.data.changeState.value}
                 sendToParent={this.getData}/>
               :null}
 
               {/*statusEffect*/}
-              {(item.statusEffect.enable===true)?
+              {(item.data.statusEffect.enable===true)?
                 <ComboBoxTags moveIndex={i} label='status effect' name={"statusEffect"}
                 items={["asleep","burned"]}
-                value={item.statusEffect.value}
+                value={item.data.statusEffect.value}
                 sendToParent={this.getData}/>
               :null}
 
               {/*category*/}
-              {(item.category.enable===true)?
+              {(item.data.category.enable===true)?
                 <ComboBoxTags moveIndex={i}  label='category' name={"category"}
                 items={["damage","net-good-stats"]}
-                value={item.category.value}
+                value={item.data.category.value}
                 sendToParent={this.getData}/>
               :null}
 
