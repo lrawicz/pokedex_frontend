@@ -3,7 +3,7 @@ import { Component } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Chip from '@mui/material/Chip';
-import { ClassMove } from '../../../Interface';
+import { ClassMove, TypeMoveData,ClassMoveData, TypeMoveDataProp } from '../../../Interface';
 
 type MyProps={
     sendToParent:any,
@@ -20,8 +20,10 @@ export default class SimpleDialog extends Component<MyProps, MyState> {
         this.state={
             move:this.props.move,
         }
+
+        //functions
         this.dialogClose = this.dialogClose.bind(this);
-        this.handleListItemClick = this.handleListItemClick.bind(this);
+        this.CategoryClick = this.CategoryClick.bind(this);
 
     }
     dialogClose = () => {
@@ -32,24 +34,34 @@ export default class SimpleDialog extends Component<MyProps, MyState> {
         })
     };
 
-    handleListItemClick = (value: string) => {
+    CategoryClick = (key:string ) => {
       let temp_move = this.state.move
-      //this.props.sendToParent(value)
-      //temp_move[value as keyof typeof this.state.move].enable = !temp_enableOptions[value as keyof typeof this.state.enableOptions].enable;
-      //this.setState({enableOptions: temp_move})
+      temp_move.data[key as keyof typeof temp_move.data ].enable = !temp_move.data[key as keyof typeof temp_move.data ].enable
+      this.setState({
+        move:temp_move
+      })
     };
     render(){
         //this.state.move[entry as keyof typeof this.state.move].
         return (
           <Dialog maxWidth='xl' onClose={this.dialogClose} open={this.state.move.dialog}>
             <DialogTitle width={"300px"}>Config</DialogTitle>
-              { Object.keys(this.state.move).map((entry:string) => (
-                <Chip 
-                label={ entry} 
-                onClick={() => this.handleListItemClick(entry)} 
-                />
+              { Object.keys(this.state.move.data).map((key) => (
+                        <Chip
+                        label={key}
+                        onClick={()=>this.CategoryClick(key)}
+                        />
               ))}
           </Dialog>
         );
     }
   }
+
+  /*
+        <Chip
+                label={key}
+                onClick={() => this.handleListItemClick(key)}
+                clickable
+                variant={key? "filled": "outlined"}
+                />
+                 */

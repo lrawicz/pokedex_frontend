@@ -24,8 +24,7 @@ export let MovesLabel = {
   category: "Category"
 }
 export interface moveProperty { enable:boolean, value:any}
-export class ClassMove {
-
+export class ClassMoveData {
   names:{value:string[],enable:boolean}  = {value:[],enable:true}
   damageClass:{value:string[],enable:boolean} = {value:[],enable:true}
   types:{value:string[],enable:boolean}  = {value:[],enable:true}
@@ -37,6 +36,12 @@ export class ClassMove {
   effectChance:{value:number[], enable:boolean} ={value:[0,100],enable:false}
   statusEffect:{value:string[],enable:boolean}  ={value:[],enable:false}
   category:{value:string[],enable:boolean} = {value:[],enable:false}
+}
+export type TypeMoveDataProp = (key in keyof ClassMoveData)
+export a interface: ()
+
+export class ClassMove {
+  data: ClassMoveData = new ClassMoveData()
   title    : string = ""
   dialog   :boolean= false
 }
