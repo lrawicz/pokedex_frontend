@@ -3,6 +3,7 @@ import * as React from 'react';
 import Slider from '@mui/material/Slider';
 import Grid from '@mui/material/Grid';
 
+import './style.css'
 type mark ={
     value:number,
     label:string
@@ -77,7 +78,7 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
     render() {
       return (
         <Grid container justifyContent="center">
-            <Grid item xs={2}><h3>{this.state.label}:</h3></Grid>
+            <Grid item xs={2}><h3 className='display-table-cell'>{this.state.label}:</h3></Grid>
             <Grid item xs={5}>
                 <Slider 
                     id={this.state.name}
