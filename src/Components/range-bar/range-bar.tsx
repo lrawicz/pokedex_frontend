@@ -2,10 +2,6 @@ import * as React from 'react';
 
 import Slider from '@mui/material/Slider';
 import Grid from '@mui/material/Grid';
-import { MarkOptions } from 'perf_hooks';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { endianness } from 'os';
 
 type mark ={
     value:number,
@@ -20,7 +16,7 @@ type MyProps={
     label: string,
     marks: mark[],
     step: number,
-    minDistante: number,
+    minDistance: number,
     moveIndex?:number| undefined
   }
 type MyState ={
@@ -31,7 +27,7 @@ type MyState ={
     label: string,
     marks: mark[],
     step: number,
-    minDistante: number,
+    minDistance: number,
     moveIndex?:number| undefined
 
 }
@@ -48,7 +44,7 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
             label: this.props.label,
             marks: [{value:this.props.min,label:this.props.min.toString()}, ...this.props.marks,{value:this.props.max,label:this.props.max.toString()}],
             step: this.props.step,
-            minDistante: this.props.minDistante,
+            minDistance: this.props.minDistance,
             moveIndex:temp_moveIndex
         }
         this.handleChange = this.handleChange.bind(this);
@@ -58,13 +54,13 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
         if (!Array.isArray(newValue)) {
           return;
         }
-        if (newValue[1] - newValue[0] < this.state.minDistante) {
+        if (newValue[1] - newValue[0] < this.state.minDistance) {
           if (activeThumb === 0) {
-            const clamped = Math.min(newValue[0], 100 - this.state.minDistante);
-            this.setState({value: [clamped, clamped + this.state.minDistante]});
+            const clamped = Math.min(newValue[0], 100 - this.state.minDistance);
+            this.setState({value: [clamped, clamped + this.state.minDistance]});
           } else {
-            const clamped = Math.max(newValue[1], this.state.minDistante);
-            this.setState({value: [clamped - this.state.minDistante, clamped]});
+            const clamped = Math.max(newValue[1], this.state.minDistance);
+            this.setState({value: [clamped - this.state.minDistance, clamped]});
           }
         } else {
           this.setState({value: newValue as number[]});
