@@ -38,6 +38,11 @@ export default class ComboBoxTags extends React.Component<MyProps, MyState> {
             moveIndex: temp_moveIndex
         }
     }
+    componentDidUpdate(prevProps: MyProps) {
+        if (prevProps.items !== this.props.items) {
+          this.setState({ items: this.props.items, value: this.props.value });
+        }
+      }
     OnChange=(event: React.SyntheticEvent<Element,Event>, tmp_value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails)=>{
         this.setState({
             value: tmp_value

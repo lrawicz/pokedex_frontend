@@ -10,8 +10,8 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import {TypeAbility} from '../../../Interface'
-import ComboBoxTags from '../../combo-box-tags/combo-box-tags'
+import {TypeAbility} from '../../Interface'
+import ComboBoxTags from '../../Components/combo-box-tags/combo-box-tags'
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 

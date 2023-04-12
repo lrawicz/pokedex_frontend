@@ -10,7 +10,7 @@ import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import SportsMmaIcon from '@mui/icons-material/SportsMma';
 import AutoFixHigh from '@mui/icons-material/AutoFixHigh';
-import {  TypeAbility,  ClassMove, ClassStats} from '../../Interface'
+import {  TypeAbility,  ClassMove, ClassStats} from '../Interface'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 //import update from 'react-addons-update'; // ES6
 import GppMaybeIcon from '@mui/icons-material/GppMaybe';

@@ -3,7 +3,7 @@ import { Component } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Chip from '@mui/material/Chip';
-import { ClassMove, TypeMoveData,ClassMoveData, TypeMoveDataProp,MovesLabel } from '../../../Interface';
+import { ClassMove, TypeMoveData,ClassMoveData, TypeMoveDataProp,MovesLabel } from '../../Interface';
 
 type MyProps={
     sendToParent:any,

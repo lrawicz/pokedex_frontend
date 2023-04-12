@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { ClassStats,TypeStatsNames} from '../../../Interface'
-import RangerBar from '../../range-bar/range-bar'
+import { ClassStats,TypeStatsNames} from '../../Interface'
+import RangerBar from '../../Components/range-bar/range-bar'
 
 type MyProps={
   sendToParent:any,
@@ -24,9 +24,6 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
     newStats = this.state.stats
     newStats[statName] = statValues
     this.setState({stats: newStats});
-    console.log("stats")
-    console.log(statValues)
-    console.log(statName)
 
 
     this.props.sendToParent(this.state.stats)

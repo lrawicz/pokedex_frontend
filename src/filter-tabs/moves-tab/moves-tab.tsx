@@ -7,11 +7,11 @@ import MuiAccordionSummary, {
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { ClassMove,TypeMoveData,moveProperty } from '../../../Interface';
+import { ClassMove,TypeMoveData,moveProperty } from '../../Interface';
 import CloseIcon from '@mui/icons-material/Close';
 
-import ComboBoxTags from '../../combo-box-tags/combo-box-tags'
-import RangeBar from '../../range-bar/range-bar'
+import ComboBoxTags from '../../Components/combo-box-tags/combo-box-tags'
+import RangeBar from '../../Components/range-bar/range-bar'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -68,24 +68,45 @@ const Accordion = styled((props: AccordionProps) => (
   type MyState ={
     expanded:number,
     moves:ClassMove[]
-    test:boolean
+    test:boolean,
+    posibleTypes:string[]
 
 }
 export default class movesTab extends React.Component<MyProps, MyState> {
     constructor(props:MyProps){
         super(props)
-        this.state ={
-            expanded:0,
-            moves: this.props.moves,
-            test: false
-          }
         this.changePanel = this.changePanel.bind(this);
         this.getData = this.getData.bind(this);
         this.addMove = this.addMove.bind(this);
         this.removeMove = this.removeMove.bind(this);
         this.DialogOpen = this.DialogOpen.bind(this);
         this.changeConfig = this.changeConfig.bind(this);
-    }
+        //this.getPokemonTypes = this.getPokemonTypes.bind(this);
+        
+        //let posibleTypes:string[] = this.getPokemonTypes()
+        this.state ={
+            expanded:0,
+            moves: this.props.moves,
+            test: false,
+            posibleTypes: []
+          }
+        }
+        componentDidMount() {
+          fetch("https://pokeapi.co/api/v2/type")
+            .then(response => {
+              return response.json()
+            })
+            .then(data => {
+              let tmp_type: string[] = []
+              data.results.forEach((element: any) => {
+                tmp_type.push(element.name)
+              })
+              this.setState((prevState) => ({
+                posibleTypes: [...prevState.posibleTypes, ...tmp_type]
+              }))
+            })
+        }
+
     changePanel(panelID: number){
         if (panelID === this.state.expanded){
             panelID =-1
@@ -174,7 +195,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               {/*types*/}
               {(item.data.types.enable===true)?
                   <ComboBoxTags moveIndex={i} label='types' name='types'
-                  items={["fire","water","grass"]}
+                  items={this.state.posibleTypes}
                   value={item.data.types.value}
                   sendToParent={this.getData}/>
               :null}
@@ -254,7 +275,6 @@ export default class movesTab extends React.Component<MyProps, MyState> {
                 value={item.data.category.value}
                 sendToParent={this.getData}/>
               :null}
-
             </AccordionDetails>
         </Accordion>
         );

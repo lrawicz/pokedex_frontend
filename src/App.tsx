@@ -1,5 +1,5 @@
 import './App.css';
-import Base from './Components/Base/Base';
+import Base from './Base/Base';
 
 export default function App() {
   return (
