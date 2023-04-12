@@ -1,20 +1,19 @@
 
-import './abilities-tab.css';
 
 import * as React from 'react';
-import Checkbox from '@mui/material/Checkbox';
-import TextField from '@mui/material/TextField';
-import Autocomplete, { AutocompleteChangeDetails, AutocompleteChangeReason } from '@mui/material/Autocomplete';
+import {Box,Paper} from '@mui/material';
+import  { AutocompleteChangeDetails, AutocompleteChangeReason } from '@mui/material/Autocomplete';
+//Icons
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+//Own:
 import {TypeAbility} from '../../Interface'
 import ComboBoxTags from '../../Components/combo-box-tags/combo-box-tags'
+import './abilities-tab.css';
+
+
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
 type MyProps={
     abilityOptions:TypeAbility
     abilitySelected:TypeAbility

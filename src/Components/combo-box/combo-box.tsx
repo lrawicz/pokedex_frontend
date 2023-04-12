@@ -1,10 +1,7 @@
 import * as React from 'react';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Grid from '@mui/material/Grid';
+import {FormControl, InputLabel, Grid, Box} from '@mui/material';
+import Select, { SelectChangeEvent }        from '@mui/material/Select';
 
 type MyProps={
     sendToParent:any,

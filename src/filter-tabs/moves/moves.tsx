@@ -1,31 +1,21 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
-import MuiAccordionSummary, {
-  AccordionSummaryProps,
-} from '@mui/material/AccordionSummary';
+import MuiAccordionSummary, {AccordionSummaryProps,} from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import { ClassMove,TypeMoveData,moveProperty } from '../../Interface';
-import CloseIcon from '@mui/icons-material/Close';
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Fab from '@mui/material/Fab';
-import EditIcon from '@mui/icons-material/Edit';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
+import {Grid,Box} from '@mui/material';
 
 //Icons
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 // Own:
 import RangeBar from '../../Components/range-bar/range-bar'
 import ComboBoxTags from '../../Components/combo-box-tags/combo-box-tags'
 import MovesDialog from './moves-dialog'
+import { ClassMove,TypeMoveData,moveProperty } from '../../Interface';
 
 
 const Accordion = styled((props: AccordionProps) => (

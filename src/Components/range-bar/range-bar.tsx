@@ -1,8 +1,5 @@
 import * as React from 'react';
-
-import Slider from '@mui/material/Slider';
-import Grid from '@mui/material/Grid';
-
+import {Paper, Box, styled, Grid, Slider} from '@mui/material';
 import './style.css'
 type mark ={
     value:number,
@@ -32,6 +29,13 @@ type MyState ={
     moveIndex?:number| undefined
 
 }
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default class ComboBox extends React.Component<MyProps, MyState> {
     constructor(props:MyProps){
@@ -77,25 +81,31 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
       };
     render() {
       return (
-        <Grid container justifyContent="center">
-            <Grid item xs={2}><h3 className='display-table-cell'>{this.state.label}:</h3></Grid>
-            <Grid item xs={5}>
-                <Slider 
-                    id={this.state.name}
-                    getAriaLabel={() => 'Minimum distance shift'}
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    disableSwap
-                    min={this.state.min}
-                    max={this.state.max}
-                    valueLabelDisplay="auto"
-                    sx={{ width: "90%" }}
-                    step={this.state.step}
-                    marks={this.state.marks}
+          <div >
 
-            />
-            </Grid>
-      </Grid>
+          <Grid  width={"70%"}  justifyContent="space-between" >
+              <Grid item xs={2}>
+                  <h3 className='display-table-cell'>{this.state.label}:</h3>
+              </Grid>
+              <Grid item xs={4}>
+
+                  <Slider
+                      id={this.state.name}
+                      getAriaLabel={() => 'Minimum distance shift'}
+                      value={this.state.value}
+                      onChange={this.handleChange}
+                      disableSwap
+                      min={this.state.min}
+                      max={this.state.max}
+                      valueLabelDisplay="auto"
+                      sx={{ width: "90%" }}
+                      step={this.state.step}
+                      marks={this.state.marks}
+                      />
+
+              </Grid>
+          </Grid>
+          </div>
       )
     }
 }
