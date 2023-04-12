@@ -14,7 +14,7 @@ export let MovesLabel = {
   names:"Names",
   damageClass:"Damage Class",
   types: "Types",
-  target: "Names",
+  target: "Target",
   power: "Power",
   priority: "Priority",
   accurrency: "Accurrency",

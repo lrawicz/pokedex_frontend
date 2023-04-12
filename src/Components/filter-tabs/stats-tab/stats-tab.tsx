@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { ClassStats,TypeStatsNames} from '../../../Interface'
-import StatItem from './stat-item/stat-item'
 import RangerBar from '../../range-bar/range-bar'
 
 type MyProps={
@@ -37,12 +36,12 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
   render() { return (
     <Box sx={{ width: "100%" }}>
       <Paper elevation={3} >
-      <h1>Stats</h1>
-        <RangerBar name="hp" label='Hp'
-            min={0} max={255} step={5} minDistance={0}
-            sendToParent={this.getStatData}
-            value={this.state.stats.hp}
-            marks={[{value:130,label:"130"}]}/>
+
+      <RangerBar name="hp" label='Hp'
+                  min={0} max={255} step={5} minDistance={0}
+                  sendToParent={this.getStatData}
+                  value={this.state.stats.hp}
+                  marks={[{value:130,label:"130"}]}/>
 
       <RangerBar  name="attack" label='Attack'
                   min={0} max={255} step={5} minDistance={0}
