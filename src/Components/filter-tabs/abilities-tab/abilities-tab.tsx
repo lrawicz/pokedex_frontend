@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import {TypeAbility} from '../../../Interface'
+import ComboBoxTags from '../../combo-box-tags/combo-box-tags'
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -32,6 +33,7 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
       abilitySelected: this.props.abilitySelected,
     }
     this.abilityOnChange = this.abilityOnChange.bind(this);
+    this.getData = this.getData.bind(this);
   }
   //event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails
   abilityOnChange(
@@ -43,91 +45,33 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
       this.setState({abilitySelected:temp_ability})
       this.props.sendToParent(this.state.abilitySelected)
   }
+  getData(key:string,data:string[]){
+    let tmp_abilitySelected = this.state.abilitySelected
+    tmp_abilitySelected[key as keyof typeof this.state.abilitySelected] = data
+    this.setState({
+      abilitySelected:tmp_abilitySelected
+    })
+  }
   render() { return (
     <Box sx={{ width: "100%" }}>
       <Paper elevation={3} >
-      <Grid container justifyContent="center">
-            <Grid item xs={2}><h3>Trigger:</h3></Grid>
-        <Autocomplete
-          multiple
-          id="trigger"
-          onChange={(event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails) => this.abilityOnChange(event,value,reason,"trigger",details,)}
-          options={this.state.abilityOptions.trigger}
-          defaultValue={this.state.abilitySelected.trigger}
-          disableCloseOnSelect
-          getOptionLabel={(option) => option} 
-          renderOption={(props, option, { selected }) => (
-            <li {...props}>
-              <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {option}
-            </li>
-          )}
-          style={{ width: 500 }}
-          renderInput={(params) => (
-            <TextField {...params} />
-          )}
-        />
-      </Grid>
-      <Grid container justifyContent="center">
-      <Grid item xs={2}><h3>Target:</h3></Grid>
 
-        <Autocomplete 
-          multiple
-          id="target"
-          options={this.state.abilityOptions.target}
-          defaultValue={this.state.abilitySelected.target}
-          disableCloseOnSelect
-          getOptionLabel={(option) => option}
-          renderOption={(props, option, { selected }) => (
-            <li {...props}>
-              <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {option}
-            </li>
-          )}
-          style={{ width: 500 }}
-          renderInput={(params) => (
-            <TextField {...params} />
-          )}
-        />
-      </Grid>
-      <Grid container justifyContent="center">
-      <Grid item xs={2}><h3>Effect:</h3></Grid>
 
-        <Autocomplete 
-          multiple
-          id="effect"
-          options={this.state.abilityOptions.effect}
-          defaultValue={this.state.abilitySelected.effect}
-          disableCloseOnSelect
-          getOptionLabel={(option) => option}
-          renderOption={(props, option, { selected }) => (
-            <li {...props}>
-              <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {option}
-            </li>
-          )}
-          style={{ width: 500 }}
-          renderInput={(params) => (
-            <TextField {...params} />
-          )}
-        />
-      </Grid>
+      <ComboBoxTags   label='Trigger' name='trigger'
+        items={this.state.abilityOptions.trigger}
+        value={this.state.abilitySelected.trigger}
+        sendToParent={this.getData}/>
 
+      <ComboBoxTags   label='Target' name='target'
+        items={this.state.abilityOptions.target}
+        value={this.state.abilitySelected.target}
+        sendToParent={this.getData}/>
+
+
+      <ComboBoxTags   label='Effect' name='effect'
+        items={this.state.abilityOptions.effect}
+        value={this.state.abilitySelected.effect}
+        sendToParent={this.getData}/>
       </Paper>
     </Box>
   )}
