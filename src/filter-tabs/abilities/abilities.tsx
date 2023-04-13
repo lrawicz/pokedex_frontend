@@ -8,7 +8,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 //Own:
 import {TypeAbility} from '../../Interface'
-import ComboBoxTags from '../../Components/combo-box-tags/combo-box-tags'
+import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
 import './abilities-tab.css';
 
 

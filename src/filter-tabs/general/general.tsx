@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Box} from '@mui/material';
 //Own:
-import ComboBoxTags from '../../Components/combo-box-tags/combo-box-tags'
+import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
 import { GeneralData } from './interface';
 type MyProps={
   sendToParent:any,
@@ -34,17 +34,18 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
         });
       }
     componentDidMount() {
-    fetch("https://pokeapi.co/api/v2/type")
-        .then(response => {
-        return response.json()
-        })
+        fetch("https://pokeapi.co/api/v2/type").then(response => {return response.json()})
         .then(data => {
-        let tmp_type: string[] = []
-        data.results.forEach((element: any) => {
-            tmp_type.push(element.name)
+            let tmp_type: string[] = []
+            data.results.forEach((element: any) => {tmp_type.push(element.name)})
+            this.setState((prevState) => ({posibleTypes: [...prevState.posibleTypes, ...tmp_type]
+        }))
         })
-        this.setState((prevState) => ({
-            posibleTypes: [...prevState.posibleTypes, ...tmp_type]
+        fetch("https://pokeapi.co/api/v2/egg-group").then(response => {return response.json()})
+        .then(data => {
+            let tmp_eggGroup: string[] = []
+            data.results.forEach((element: any) => {tmp_eggGroup.push(element.name)})
+            this.setState((prevState) => ({posibleEggGroup: [...prevState.posibleEggGroup, ...tmp_eggGroup]
         }))
         })
     }

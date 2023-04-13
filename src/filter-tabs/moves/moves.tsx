@@ -12,8 +12,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 // Own:
-import RangeBar from '../../Components/range-bar/range-bar'
-import ComboBoxTags from '../../Components/combo-box-tags/combo-box-tags'
+import RangeBar from '../../components/range-bar/range-bar'
+import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
 import MovesDialog from './moves-dialog'
 import { ClassMove,TypeMoveData,moveProperty } from '../../Interface';
 
