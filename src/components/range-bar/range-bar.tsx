@@ -72,11 +72,6 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
           max = clamped
           min = newValue[0]
         }
-        //let tmp_data:{value:number[],operator:"MinMax"} = this.state.data
-        //console.log("hola")
-        //console.log(tmp_data)
-        //tmp_data["value"]  = [min,max]
-        //console.log(tmp_data)
         this.setState({data: {...this.state.data,value:[min,max]}})
         this.props.sendToParent(this.state.name, this.state.data, this.state.moveIndex)
       };
