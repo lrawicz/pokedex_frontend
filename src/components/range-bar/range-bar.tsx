@@ -52,8 +52,6 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
             moveIndex:temp_moveIndex
         }
         this.handleChange = this.handleChange.bind(this);
-        console.log(this.state.name)
-        console.log(this.state.data)
     }
     handleChange(event: Event,newValue: number | number[],activeThumb: number){
         if (!Array.isArray(newValue)) {
@@ -61,7 +59,6 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
         }
         let min:number = 0
         let max:number = 0
-        console.log(newValue)
 
         if (activeThumb === 0) {
           const clamped = Math.min(newValue[0], newValue[1] - this.state.minDistance);
