@@ -15,8 +15,8 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import RangeBar from '../../components/range-bar/range-bar'
 import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
 import MovesDialog from './moves-dialog'
-import { ClassMove,TypeMoveData,moveProperty } from '../../Interface';
-
+import { moveProperty } from '../../Interface';
+import { TypeMoveData, ClassMove, ClassMoveData, TypeMoveDataProp} from './classes'
 
 const Accordion = styled((props: AccordionProps) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -73,7 +73,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
     constructor(props:MyProps){
         super(props)
         this.changePanel = this.changePanel.bind(this);
-        this.getData = this.getData.bind(this);
+        this.getFilterDataFromChild = this.getFilterDataFromChild.bind(this);
         this.addMove = this.addMove.bind(this);
         this.removeMove = this.removeMove.bind(this);
         this.DialogOpen = this.DialogOpen.bind(this);
@@ -118,15 +118,16 @@ export default class movesTab extends React.Component<MyProps, MyState> {
         this.props.sendToParent(this.state.moves)
     }
 
-    getData(prop:TypeMoveData,data:any,moveIndex?:number, enable?:boolean){
-        if (typeof(moveIndex) !== "number"){return}
-        let temp_move:ClassMove = this.state.moves[moveIndex]
-        let temp_moves:ClassMove[] = this.state.moves
-          temp_move.data[prop]["value"] = data
+    getFilterDataFromChild(key:string,data:any,moveIndex?:number, enable?:boolean){
+        if (typeof(moveIndex) === "number"){
+          let temp_move:ClassMove = this.state.moves[moveIndex]
+          let temp_moves:ClassMove[] = this.state.moves
+          temp_move.data[key as keyof typeof temp_move.data] = data
           temp_moves[moveIndex] =  temp_move
           this.setState({moves: temp_moves})
           this.props.sendToParent(this.state.moves)
-      }
+        }
+    }
     DialogOpen(indexMove:number){
       let temp_move:ClassMove =  this.state.moves[indexMove]
       let temp_moves:ClassMove[] =  this.state.moves
@@ -177,41 +178,41 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               {(item.data.names.enable===true)?
                   <ComboBoxTags moveIndex={i} name='names' label='Names'
                   items={['baton-pass','follow-me']}
-                  value={item.data.names.value}
-                  sendToParent={this.getData}/>
+                  data={item.data.names}
+                  sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*damageClass*/}
               {(item.data.damageClass.enable===true)?
                   <ComboBoxTags moveIndex={i} label='Damage class' name='damageClass'
                   items={['status','physical','special']}
-                  value={item.data.damageClass.value}
-                  sendToParent={this.getData}/>
+                  data={item.data.damageClass}
+                  sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*types*/}
               {(item.data.types.enable===true)?
                   <ComboBoxTags moveIndex={i} label='types' name='types'
                   items={this.state.posibleTypes}
-                  value={item.data.types.value}
-                  sendToParent={this.getData}/>
+                  data={item.data.types}
+                  sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*target*/}
               {(item.data.target.enable===true)?
                 <ComboBoxTags moveIndex={i} label='target' name='target'
                 items={["all-opponents","user"]}
-                value={item.data.target.value}
-                sendToParent={this.getData}/>
+                data={item.data.target}
+                sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*power*/}
               {(item.data.power.enable===true)?
                 <RangeBar moveIndex={i} label='power' name='power'
                 min={0} max={255} step={5} minDistance={0}
-                value={item.data.power.value}
+                data={item.data.power}
                 marks={[40,80,100,120,150]}
-                sendToParent={this.getData}/>
+                sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*priority*/}
@@ -219,43 +220,44 @@ export default class movesTab extends React.Component<MyProps, MyState> {
                 <RangeBar moveIndex={i} label='priority' name='priority'
                 min={-7} max={5} step={1} minDistance={0}
                 marks={[0]}
-                value={item.data.priority.value}
-                sendToParent={this.getData}/>
+                data={item.data.priority}
+                sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*accuracy*/}
               {(item.data.accurrency.enable===true)?
                 <RangeBar moveIndex={i} label='Accuracy'  name='accuracy'
                 min={0} max={100} step={5} minDistance={0}
-                value={item.data.accurrency.value}
+                data={item.data.accurrency}
                 marks={[70]}
-                sendToParent={this.getData}/>
+                sendToParent={this.getFilterDataFromChild}/>
               :null}
 
 
-              {/*changeState*/}
+              {/*effectChance*/}
               {(item.data.effectChance.enable===true)?
                 <RangeBar moveIndex={i} label='effect chance' name='effectChance'
                 min={0} max={100} step={5} minDistance={0}
                 marks={[50,70]}
-                value={item.data.effectChance.value}
-                sendToParent={this.getData}/>
+                data={item.data.effectChance}
+                sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*statusEffect*/}
               {(item.data.statusEffect.enable===true)?
                 <ComboBoxTags moveIndex={i} label='status effect' name={"statusEffect"}
                 items={["asleep","burned"]}
-                value={item.data.statusEffect.value}
-                sendToParent={this.getData}/>
+                data={item.data.statusEffect}
+                sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*category*/}
+              {/* ADD OPERATOR*/}
               {(item.data.category.enable===true)?
                 <ComboBoxTags moveIndex={i}  label='category' name={"category"}
                 items={["damage","net-good-stats"]}
-                value={item.data.category.value}
-                sendToParent={this.getData}/>
+                data={item.data.category}
+                sendToParent={this.getFilterDataFromChild}/>
               :null}
             </AccordionDetails>
         </Accordion>

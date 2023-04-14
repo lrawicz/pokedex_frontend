@@ -183,7 +183,6 @@ export default function SecondComponent() {
       <Box  component="main" sx={{ padding:"3em", flexGrow: 2, p: 3}} >
         <DrawerHeader />
         <Filters />
-        
         </Box>
     </Box>
     

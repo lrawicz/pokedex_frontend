@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+import {Grid,Box} from '@mui/material';
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import SportsMmaIcon from '@mui/icons-material/SportsMma';
@@ -9,7 +9,8 @@ import AutoFixHigh from '@mui/icons-material/AutoFixHigh';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import GppMaybeIcon from '@mui/icons-material/GppMaybe';
 // Own:
-import {  TypeAbility,  ClassMove, ClassStats} from '../Interface'
+import {  ClassAbility, ClassStats} from '../Interface'
+import { ClassMove} from './moves/classes'
 import StatsTab from './stats/stats';
 import AbiltiesTab from './abilities/abilities';
 import MovesTab from './moves/moves';
@@ -28,8 +29,8 @@ type MyState ={
   tabsArray: boolean[], 
   value: number,
   stats: ClassStats
-  abilityOptions: TypeAbility,
-  abilitySelected: TypeAbility,
+  abilityOptions: {trigger:string[],target:string[],effect:string[]},
+  abilitySelected: ClassAbility,
   moves: ClassMove[],
   general: GeneralData
 
@@ -37,6 +38,7 @@ type MyState ={
 export default class Filters extends React.Component<MyProps, MyState> {
 
   constructor(props:MyProps){
+
     super(props)
     let move01:ClassMove = new ClassMove()
     move01.title= "01"
@@ -51,11 +53,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
         target: ["asd2"],
         effect: ["asd3"]
       },
-      abilitySelected:{
-        trigger: [],
-        target: [],
-        effect: []
-      },
+      abilitySelected: new ClassAbility(),
       moves:[move01,move02],
       general: new GeneralData()
     }
@@ -104,7 +102,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
   getStatData = (data:ClassStats) =>{
     this.setState({stats: data});
   }
-  getAbilityData = (data:TypeAbility) =>{
+  getAbilityData = (data:ClassAbility) =>{
     this.setState({abilitySelected: data});
   }
   getMovesData = (data:ClassMove[]) =>{
@@ -114,18 +112,21 @@ export default class Filters extends React.Component<MyProps, MyState> {
     this.setState({general: data});
   }
   render() { return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%' }} justifyContent="space-between">
 
-    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-      <Tabs value={this.state.value} onChange={this.handleChange}  aria-label="basic tabs example">
-        <Tab label="General" icon={<CatchingPokemonIcon/>}  {... this.a11yProps(0)} />
-        <Tab label="Stats"  icon={<AlignHorizontalLeftIcon/>}   {...this.a11yProps(1)} />
-        <Tab  label="Ability" icon={<AutoFixHigh/>} {...this.a11yProps(2)}/>
-        <Tab label="Moves" icon={<SportsMmaIcon/>} {...this.a11yProps(3)} />
-        <Tab label="Defensive" icon={<GppMaybeIcon/>} {...this.a11yProps(4)} />
-        <Tab label="Misc" icon={<MoreHorizIcon/>} {...this.a11yProps(5)} />
-      </Tabs>
-    </Box>
+    <Grid  container display={"grid"} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Grid xs={8} item>
+          <Tabs value={this.state.value} onChange={this.handleChange}  aria-label="basic tabs example">
+            <Tab  label="General" icon={<CatchingPokemonIcon/>}  {... this.a11yProps(0)} />
+            <Tab label="Stats"  icon={<AlignHorizontalLeftIcon/>}   {...this.a11yProps(1)} />
+            <Tab  label="Ability" icon={<AutoFixHigh/>} {...this.a11yProps(2)}/>
+            <Tab label="Moves" icon={<SportsMmaIcon/>} {...this.a11yProps(3)} />
+            <Tab sx={{backgroundColor:"#998b82"}} label="Defensive" icon={<GppMaybeIcon/>} {...this.a11yProps(4)} />
+            <Tab sx={{backgroundColor:"#998b82"}} label="Misc" value={7} icon={<MoreHorizIcon/>} {...this.a11yProps(5)} />
+          </Tabs>
+        </Grid>
+
+    </Grid>
     <this.TabPanel value={this.state.value} index={0}>
       <PokemonTab data={this.state.general} sendToParent={this.getStatData}/>
     </this.TabPanel>

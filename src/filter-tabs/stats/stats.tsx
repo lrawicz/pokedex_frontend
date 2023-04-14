@@ -14,18 +14,16 @@ type MyState ={
 export default class StatsTab extends React.Component<MyProps, MyState>{
   constructor(props:MyProps){ 
     super(props)
-    this.getStatData = this.getStatData.bind(this);
+    this.getFilterDataFromChild = this.getFilterDataFromChild.bind(this);
     this.state = {
       stats: props.stats
     }
   }
-  getStatData = (statName:TypeStatsNames,statValues:number[]) => {
+  getFilterDataFromChild = (statName:TypeStatsNames,statValues:number[]) => {
     let newStats:ClassStats
     newStats = this.state.stats
-    newStats[statName] = statValues
+    newStats[statName].value = statValues
     this.setState({stats: newStats});
-
-
     this.props.sendToParent(this.state.stats)
   }
 
@@ -36,38 +34,38 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
 
       <RangerBar name="hp" label='Hp'
                   min={0} max={255} step={5} minDistance={0}
-                  sendToParent={this.getStatData}
-                  value={this.state.stats.hp}
+                  sendToParent={this.getFilterDataFromChild}
+                  data={this.state.stats.hp}
                   marks={[100,130]}/>
 
       <RangerBar  name="attack" label='Attack'
                   min={0} max={255} step={5} minDistance={0}
-                  sendToParent={this.getStatData}
-                  value={this.state.stats.attack}
+                  sendToParent={this.getFilterDataFromChild}
+                  data={this.state.stats.attack}
                   marks={[100,130]}/>
 
       <RangerBar  name="defense" label='Defense'
                   min={0} max={255} step={5} minDistance={0}
-                  sendToParent={this.getStatData}
-                  value={this.state.stats.defense}
+                  sendToParent={this.getFilterDataFromChild}
+                  data={this.state.stats.defense}
                   marks={[100,130]}/>
 
       <RangerBar  name="specialAttack" label='Special Attack'
                   min={0} max={255} step={5} minDistance={0}
-                  sendToParent={this.getStatData}
-                  value={this.state.stats.specialAttack}
+                  sendToParent={this.getFilterDataFromChild}
+                  data={this.state.stats.specialAttack}
                   marks={[100,130]}/>
 
       <RangerBar  name="specialDefense" label='Special Defense'
                   min={0} max={255} step={5} minDistance={0}
-                  sendToParent={this.getStatData}
-                  value={this.state.stats.specialDefense}
+                  sendToParent={this.getFilterDataFromChild}
+                  data={this.state.stats.specialDefense}
                   marks={[100,130]}/>
 
       <RangerBar  name="speed" label='Speed'
                   min={0} max={255} step={5} minDistance={0}
-                  sendToParent={this.getStatData}
-                  value={this.state.stats.speed}
+                  sendToParent={this.getFilterDataFromChild}
+                  data={this.state.stats.speed}
                   marks={[100,130]}/>
       </Paper>
       </Box>

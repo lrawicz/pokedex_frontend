@@ -10,9 +10,9 @@ type MyProps={
 }
 type MyState ={
     data:GeneralData
-  posibleTypes:string[],
-  posibleNames:string[],
-  posibleEggGroup:string[],
+    posibleTypes:string[],
+    posibleNames:string[],
+    posibleEggGroup:string[],
 
 }
 export default class StatsTab extends React.Component<MyProps, MyState>{
@@ -56,25 +56,25 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
                 {/*type 01*/}
                     <ComboBoxTags label='Names' name='names'
                     items={this.state.posibleNames}
-                    value={this.state.data.names}
+                    data={this.state.data.names}
                     sendToParent={this.getData}/>
                 
                 {/*type 01*/}
                     <ComboBoxTags label='Type 01' name='type01'
                     items={this.state.posibleTypes}
-                    value={this.state.data.type01}
+                    data={this.state.data.type01}
                     sendToParent={this.getData}/>
                 
                 {/*type 02*/}
                     <ComboBoxTags label='Type 02' name='type02'
                     items={this.state.posibleTypes}
-                    value={this.state.data.type02}
+                    data={this.state.data.type02}
                     sendToParent={this.getData}/>
                 
                 {/*Egg Group*/}
                     <ComboBoxTags label='Egg Group' name='eggGroup'
                     items={this.state.posibleEggGroup}
-                    value={this.state.data.eggGroup}
+                    data={this.state.data.eggGroup}
                     sendToParent={this.getData}/>
                 </Box>
             )}

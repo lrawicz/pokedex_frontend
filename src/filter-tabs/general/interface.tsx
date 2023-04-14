@@ -1,6 +1,6 @@
 export class GeneralData {
-    names:string[]=[]
-    type01:string[]= []
-    type02:string[]=[]
-    eggGroup:string[]=[]
+    names:{value:string[], operator:"OneOf" | "ContainsAll"} = {value:[],operator:"OneOf"}
+    type01:{value:string[], operator:"OneOf" | "ContainsAll"} = {value:[],operator:"OneOf"}
+    type02:{value:string[], operator:"OneOf" | "ContainsAll"} = {value:[],operator:"OneOf"}
+    eggGroup:{value:string[], operator:"OneOf" | "ContainsAll"} = {value:[],operator:"OneOf"}
 }

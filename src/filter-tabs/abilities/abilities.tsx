@@ -7,7 +7,7 @@ import  { AutocompleteChangeDetails, AutocompleteChangeReason } from '@mui/mater
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 //Own:
-import {TypeAbility} from '../../Interface'
+import { ClassAbility} from '../../Interface'
 import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
 import './abilities-tab.css';
 
@@ -15,14 +15,14 @@ import './abilities-tab.css';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 type MyProps={
-    abilityOptions:TypeAbility
-    abilitySelected:TypeAbility
+    abilityOptions:{trigger:string[],target:string[],effect:string[]}
+    abilitySelected:ClassAbility
 
     sendToParent:any,
 }
 type MyState ={
-  abilityOptions:TypeAbility
-  abilitySelected:TypeAbility
+  abilityOptions:{trigger:string[],target:string[],effect:string[]}
+  abilitySelected:ClassAbility
 }
 export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   constructor(props:MyProps){
@@ -38,15 +38,15 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   abilityOnChange(
     event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, ID: ("trigger" | "effect" | "target"), details?: AutocompleteChangeDetails)
     {
-      let temp_ability:TypeAbility
+      let temp_ability:ClassAbility
       temp_ability = this.state.abilitySelected
-      temp_ability[ID] = value
+      temp_ability[ID].value = value
       this.setState({abilitySelected:temp_ability})
       this.props.sendToParent(this.state.abilitySelected)
   }
   getData(key:string,data:string[]){
     let tmp_abilitySelected = this.state.abilitySelected
-    tmp_abilitySelected[key as keyof typeof this.state.abilitySelected] = data
+    tmp_abilitySelected[key as keyof typeof this.state.abilitySelected].value = data
     this.setState({
       abilitySelected:tmp_abilitySelected
     })
@@ -58,18 +58,18 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
 
       <ComboBoxTags   label='Trigger' name='trigger'
         items={this.state.abilityOptions.trigger}
-        value={this.state.abilitySelected.trigger}
+        data={this.state.abilitySelected.trigger}
         sendToParent={this.getData}/>
 
       <ComboBoxTags   label='Target' name='target'
         items={this.state.abilityOptions.target}
-        value={this.state.abilitySelected.target}
+        data={this.state.abilitySelected.target}
         sendToParent={this.getData}/>
 
 
       <ComboBoxTags   label='Effect' name='effect'
         items={this.state.abilityOptions.effect}
-        value={this.state.abilitySelected.effect}
+        data={this.state.abilitySelected.effect}
         sendToParent={this.getData}/>
       </Paper>
     </Box>

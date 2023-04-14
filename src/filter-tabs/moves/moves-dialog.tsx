@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 import {Dialog,Chip, DialogTitle} from '@mui/material';
 // Own:
-import { ClassMove,ClassMoveData,MovesLabel } from '../../Interface';
+import { MovesLabel, ClassMove, ClassMoveData, TypeMoveDataProp} from './classes'
 
 type MyProps={
     sendToParent:any,
