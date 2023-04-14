@@ -10,13 +10,13 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import GppMaybeIcon from '@mui/icons-material/GppMaybe';
 // Own:
 import { ClassStats } from './stats/classes';
+import { ClassGeneralData } from './general/classes';
 import { ClassAbility } from './abilities/classes';
 import { ClassMove} from './moves/classes'
 import StatsTab from './stats/stats';
 import AbiltiesTab from './abilities/abilities';
 import MovesTab from './moves/moves';
 import PokemonTab from './general/general'
-import { GeneralData } from './general/classes';
 interface TabPanelProps {
  children?: React.ReactNode;
  index: number;
@@ -33,7 +33,7 @@ type MyState ={
   abilityOptions: {trigger:string[],target:string[],effect:string[]},
   abilitySelected: ClassAbility,
   moves: ClassMove[],
-  general: GeneralData
+  general: ClassGeneralData
 
 }
 export default class Filters extends React.Component<MyProps, MyState> {
@@ -56,7 +56,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
       },
       abilitySelected: new ClassAbility(),
       moves:[move01,move02],
-      general: new GeneralData()
+      general: new ClassGeneralData()
     }
     //const [tabsArray, setTabsArray] = useState([true,true,true,true,true]);
     //const [value, setValue] = React.useState(0);
@@ -109,7 +109,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
   getMovesData = (data:ClassMove[]) =>{
     this.setState({moves: data});
   }
-  getGeneralData = (data:GeneralData) =>{
+  getClassGeneralData = (data:ClassGeneralData) =>{
     this.setState({general: data});
   }
   render() { return (

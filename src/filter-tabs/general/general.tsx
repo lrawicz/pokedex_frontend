@@ -2,14 +2,14 @@ import * as React from 'react';
 import {Box} from '@mui/material';
 //Own:
 import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
-import { GeneralData } from './classes';
+import { ClassGeneralData } from './classes';
 type MyProps={
   sendToParent:any,
-  data: GeneralData
+  data: ClassGeneralData
   //stats: ClassStats,
 }
 type MyState ={
-    data:GeneralData
+    data:ClassGeneralData
     posibleTypes:string[],
     posibleNames:string[],
     posibleEggGroup:string[],
@@ -26,8 +26,8 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
         }
     }
 
-    getData = (key: keyof GeneralData,value:any) => {
-        let temp_data:GeneralData = this.state.data
+    getData = (key: keyof ClassGeneralData,value:any) => {
+        let temp_data:ClassGeneralData = this.state.data
         temp_data[key] = value
         this.setState({
             data: temp_data 
