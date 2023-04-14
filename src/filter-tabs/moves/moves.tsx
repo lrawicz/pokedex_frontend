@@ -15,7 +15,6 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import RangeBar from '../../components/range-bar/range-bar'
 import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
 import MovesDialog from './moves-dialog'
-import { moveProperty } from '../../Interface';
 import { TypeMoveData, ClassMove, ClassMoveData, TypeMoveDataProp} from './classes'
 
 const Accordion = styled((props: AccordionProps) => (

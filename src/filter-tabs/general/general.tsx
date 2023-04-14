@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Box} from '@mui/material';
 //Own:
 import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
-import { GeneralData } from './interface';
+import { GeneralData } from './classes';
 type MyProps={
   sendToParent:any,
   data: GeneralData

@@ -7,7 +7,7 @@ import  { AutocompleteChangeDetails, AutocompleteChangeReason } from '@mui/mater
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 //Own:
-import { ClassAbility} from '../../Interface'
+import { ClassAbility} from './classes'
 import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
 import './abilities-tab.css';
 

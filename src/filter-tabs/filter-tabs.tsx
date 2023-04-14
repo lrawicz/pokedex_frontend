@@ -9,13 +9,14 @@ import AutoFixHigh from '@mui/icons-material/AutoFixHigh';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import GppMaybeIcon from '@mui/icons-material/GppMaybe';
 // Own:
-import {  ClassAbility, ClassStats} from '../Interface'
+import { ClassStats } from './stats/classes';
+import { ClassAbility } from './abilities/classes';
 import { ClassMove} from './moves/classes'
 import StatsTab from './stats/stats';
 import AbiltiesTab from './abilities/abilities';
 import MovesTab from './moves/moves';
 import PokemonTab from './general/general'
-import { GeneralData } from './general/interface';
+import { GeneralData } from './general/classes';
 interface TabPanelProps {
  children?: React.ReactNode;
  index: number;
@@ -118,9 +119,9 @@ export default class Filters extends React.Component<MyProps, MyState> {
       <Grid xs={8} item>
           <Tabs value={this.state.value} onChange={this.handleChange}  aria-label="basic tabs example">
             <Tab  label="General" icon={<CatchingPokemonIcon/>}  {... this.a11yProps(0)} />
-            <Tab label="Stats"  icon={<AlignHorizontalLeftIcon/>}   {...this.a11yProps(1)} />
+            <Tab  label="Stats"  icon={<AlignHorizontalLeftIcon/>}   {...this.a11yProps(1)} />
             <Tab  label="Ability" icon={<AutoFixHigh/>} {...this.a11yProps(2)}/>
-            <Tab label="Moves" icon={<SportsMmaIcon/>} {...this.a11yProps(3)} />
+            <Tab  label="Moves" icon={<SportsMmaIcon/>} {...this.a11yProps(3)} />
             <Tab sx={{backgroundColor:"#998b82"}} label="Defensive" icon={<GppMaybeIcon/>} {...this.a11yProps(4)} />
             <Tab sx={{backgroundColor:"#998b82"}} label="Misc" value={7} icon={<MoreHorizIcon/>} {...this.a11yProps(5)} />
           </Tabs>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { ClassStats,TypeStatsNames} from '../../Interface'
+import { ClassStats,TypeStatsNames} from './classes'
 import RangerBar from '../../components/range-bar/range-bar'
 
 type MyProps={
