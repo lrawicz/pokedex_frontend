@@ -44,9 +44,9 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
       this.setState({abilitySelected:temp_ability})
       this.props.sendToParent(this.state.abilitySelected)
   }
-  getData(key:string,data:string[]){
+  getData(key:string,data:{value:string[],operator:("OneOf"|"ContainsAll")}){
     let tmp_abilitySelected = this.state.abilitySelected
-    tmp_abilitySelected[key as keyof typeof this.state.abilitySelected].value = data
+    tmp_abilitySelected[key as keyof typeof this.state.abilitySelected] = data
     this.setState({
       abilitySelected:tmp_abilitySelected
     })
