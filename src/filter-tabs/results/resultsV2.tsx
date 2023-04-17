@@ -153,7 +153,7 @@ class Row extends React.Component<RowProps, RowState>{
             .then(response => {return response.json()})
             .then(data => {
                 this.setState({data:data}) 
-                console.log(data)})
+            })
         }
     render() { return (
         <Paper  sx={{ width: '100%', overflow: 'hidden' }}>

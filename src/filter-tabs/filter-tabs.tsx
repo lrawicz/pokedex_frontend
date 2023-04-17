@@ -93,7 +93,6 @@ export default class Filters extends React.Component<MyProps, MyState> {
         value: newValue
       })
     }else{
-      console.log("hola")
     }
   }
   tabOnClick = (event: React.SyntheticEvent,index:number) => {
@@ -107,7 +106,6 @@ export default class Filters extends React.Component<MyProps, MyState> {
   }
   getStatData = (data:ClassStats) =>{
     this.setState({filter:{...this.state.filter, stats: data}});
-
   }
   getAbilityData = (data:ClassAbility) =>{
     this.setState({filter:{...this.state.filter, ability: data}});
@@ -134,10 +132,8 @@ export default class Filters extends React.Component<MyProps, MyState> {
             <Tab sx={{backgroundColor:"#998b82"}} label="Defensive" icon={<GppMaybeIcon/>} {...this.a11yProps(4)} />
             <Tab sx={{backgroundColor:"#998b82"}} label="Misc" icon={<MoreHorizIcon/>} {...this.a11yProps(5)} />
             <Tab sx={{backgroundColor:"#8fd053"}} label="Filter" icon={<FilterAltIcon/>} {...this.a11yProps(6)} />
-
           </Tabs>
         </Grid>
-
     </Grid>
     <this.TabPanel value={this.state.value} index={0}>
       <PokemonTab data={this.state.filter.general} sendToParent={this.getStatData}/>

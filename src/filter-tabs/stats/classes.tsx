@@ -1,10 +1,10 @@
 export class ClassStats{
-    hp:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[0,255]}
-    attack:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[0,255]}
-    specialAttack:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[0,255]}
-    defense:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[0,255]}
-    specialDefense:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[0,255]}
-    speed:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[0,255]}
+    hp:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[]}
+    attack:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[]}
+    specialAttack:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[]}
+    defense:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[]}
+    specialDefense:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[]}
+    speed:{operator: "MinMax",value: number[]} = {operator: "MinMax", value:[]}
   }
 
 export type TypeStatsNames =  keyof ClassStats

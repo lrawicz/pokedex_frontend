@@ -8,13 +8,13 @@ export class ClassMoveData {
     target:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean} 
       = {value:[],enable:false, operator:"OneOf"}
     power:{value:number[], enable:boolean, operator:"MinMax"}  
-      = {value:[0,255], enable:true,operator:"MinMax"}
+      = {value:[], enable:true,operator:"MinMax"}
     priority:{value:number[], enable:boolean, operator:"MinMax"} 
-      = {value:[-7,5],enable:false,operator:"MinMax"}
+      = {value:[],enable:false,operator:"MinMax"}
     accurrency:{value:number[], enable:boolean, operator:"MinMax"} 
-      = {value:[0,100],enable:false,operator:"MinMax"}
+      = {value:[],enable:false,operator:"MinMax"}
     effectChance:{value:number[], enable:boolean, operator:"MinMax"} 
-      = {value:[0,100],enable:false,operator:"MinMax"}
+      = {value:[],enable:false,operator:"MinMax"}
     statusEffect:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}  
       = {value:[],enable:false, operator:"OneOf"}
     category:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean} 

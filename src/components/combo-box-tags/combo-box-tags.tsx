@@ -33,8 +33,8 @@ export default class ComboBoxTags extends React.Component<MyProps, MyState> {
         super(props)
         let temp_moveIndex = typeof(this.props.moveIndex)== "number"?  this.props.moveIndex:undefined
         this.state = {
-            data:this.props.data,
-            items:this.props.items,
+            data: this.props.data,
+            items: this.props.items,
             name: this.props.name,
             label: this.props.label,
             moveIndex: temp_moveIndex,
@@ -47,14 +47,12 @@ export default class ComboBoxTags extends React.Component<MyProps, MyState> {
         }
       }
     OnValueChange=(event: React.SyntheticEvent<Element,Event>, tmp_value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails)=>{
-        let tmp_data:{value:string[],operator:"OneOf" | "ContainsAll"}  =this.state.data
-        tmp_data["value"] = tmp_value
-        this.setState({data: tmp_data})
-        this.props.sendToParent(this.state.name, tmp_data, this.state.moveIndex)
+        this.setState({data: {...this.state.data,value:tmp_value}})
+        this.props.sendToParent(this.state.name, {...this.state.data,value:tmp_value}, this.state.moveIndex)
     }
     OnOperatorChange=(event: React.SyntheticEvent<Element,Event>, tmp_value: string | null, reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails)=>{
         let tmp_data:{value:string[],operator:"OneOf" | "ContainsAll"}  =this.state.data
-        if (tmp_value == "OneOf"){
+        if (tmp_value === "OneOf"){
             tmp_data["operator"] = "OneOf"
         }else{
             tmp_data["operator"] = "ContainsAll"
