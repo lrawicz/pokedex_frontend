@@ -19,7 +19,8 @@ type MyState ={
     min:number, max:number,
     name: string, label: string,
     marks: mark[],step: number, minDistance: number,
-    moveIndex?:number| undefined
+    moveIndex?:number| undefined,
+    showValue: number[]
 }
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -39,6 +40,12 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
           temp_marks.push({value:element,label:element.toString()})
         });
         temp_marks.push({value:this.props.max,label:this.props.max.toString()})
+        let temp_showValue:number[] = [this.props.data.value[0],this.props.data.value[1]]
+        if (temp_showValue.length === 0 ){
+            temp_showValue = [this.props.min,this.props.max]
+        }
+
+
 
         this.state = {
             data: this.props.data,
@@ -49,7 +56,8 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
             marks: temp_marks,
             step: this.props.step,
             minDistance: this.props.minDistance,
-            moveIndex:temp_moveIndex
+            moveIndex:temp_moveIndex,
+            showValue: temp_showValue
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -69,7 +77,12 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
           max = clamped
           min = newValue[0]
         }
-        this.setState({data: {...this.state.data,value:[min,max]}})
+        this.setState({showValue: [min,max]})
+        if (min === this.state.min && max === this.state.max){
+          this.setState({data: {...this.state.data,value:[]}})
+        }else{
+          this.setState({data: {...this.state.data,value:[min,max]}})
+        }
         this.props.sendToParent(this.state.name, this.state.data, this.state.moveIndex)
       };
     render() {
@@ -85,7 +98,7 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
                   <Slider
                       id={this.state.name}
                       getAriaLabel={() => 'Minimum distance shift'}
-                      value={this.state.data.value}
+                      value={this.state.showValue}
                       onChange={this.handleChange}
                       disableSwap
                       min={this.state.min}

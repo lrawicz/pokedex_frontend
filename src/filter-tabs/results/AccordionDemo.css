@@ -1,0 +1,39 @@
+/* AccordionDemo.css */
+
+.accordion-demo .accordion-custom i, .accordion-demo .accordion-custom span {
+    vertical-align: middle;
+}
+
+.accordion-demo .accordion-custom span {
+    margin: 0 .5rem;
+}
+
+.accordion-demo .p-accordion p {
+    line-height: 1.5;
+    margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+      'poke_img   poke_img   poke_name   poke_name   poke_name   poke_name'
+      'poke_img   poke_img   poke_type poke_type poke_type poke_type'
+      'poke_img   poke_img   poke_type poke_type poke_type poke_type'
+      'poke_abilty poke_abilty poke_abilty  poke_abilty  poke_abilty  poke_abilty'
+      'poke_stats poke_stats poke_stats  poke_stats  poke_stats  poke_stats'
+      'poke_stats poke_stats poke_stats  poke_stats  poke_stats  poke_stats'
+      'poke_stats poke_stats poke_stats  poke_stats  poke_stats  poke_stats';
+
+
+    gap: 10px;
+    background-color: #358a99;
+    padding: 10px;
+  }
+.item1 { grid-area: header; }
+.poke_img { grid-area: poke_img; }
+.poke_name { grid-area: poke_name; }
+.poke_id { grid-area: poke_id; }
+.poke_type { grid-area: poke_type; }
+.poke_abilty { grid-area: poke_abilty; }
+.poke_stats { grid-area: poke_stats; }
+.poke_statsV {grid-area: poke_statsV;}

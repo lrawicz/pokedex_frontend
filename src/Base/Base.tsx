@@ -22,7 +22,11 @@ import Switch from '@mui/material/Switch';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 import Filters from "../filter-tabs/filter-tabs"
-
+// Own:
+import { ClassAbility } from '../filter-tabs/abilities/classes';
+import { ClassMove } from '../filter-tabs/moves/classes';
+import { ClassGeneralData } from '../filter-tabs/general/classes';
+import { ClassStats } from '../filter-tabs/stats/classes';
 //var filterObject: globalAppVariables;
 //type filterObject = any;
 const drawerWidth = 240;
@@ -96,7 +100,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const handleMenuClick = (event: any,params:string) => {
-    //event.preventDefault();
+  //event.preventDefault();
 
     //const button: HTMLButtonElement = event.currentTarget;
     //setClickedButton(button.name);
@@ -105,17 +109,80 @@ const handleMenuClick = (event: any,params:string) => {
 //const handleMenuClick = (e) => {
 //    e.preventDefault();
 //  }
+type MyProps={
+  //tabsArray: boolean[], 
+  //value: number
+}
+type MyState ={
+  abilitySelected: ClassAbility,
+  stats: ClassStats,
+  moves: ClassMove[],
+  general: ClassGeneralData,
+  open: boolean
+}
+export default class SecondComponent extends React.Component<MyProps, MyState> {
+  constructor(props:MyProps){
+    super(props)
+    let move01 = new ClassMove();
+    move01.title = "01"
+    let move02 = new ClassMove();
+    move02.title = "02"
 
-export default function SecondComponent() {
-  const theme = useTheme();
+    this.state={
+      abilitySelected: new ClassAbility(),
+      stats: new ClassStats(),
+      moves: [move01,move02],
+      general: new ClassGeneralData(),
+      open: false
+    }
+    this.getDataFromChild = this.getDataFromChild.bind(this)
+    this.handleDrawer = this.handleDrawer.bind(this)
+  }
+  getDataFromChild(data:any){
+    this.setState({
+      abilitySelected: data.abilitySelected,
+      stats: data.stats,
+      moves: data.moves,
+      general: data.general,
+    })
+    
+  }
+  handleDrawer = (var_open:boolean) => {
+    this.setState({open: var_open})
+  };
+  render() { return (
+    <Box sx={{ display: 'flex', height:'100%'}}>
+      <CssBaseline />
+      <AppBar position="fixed" open={this.state.open}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={() => {console.log(this.state)}}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(this.state.open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Generations: 01 / 02 / 03 / 04 / 05 / 06 / 07 / 08
+          </Typography>
+        </Toolbar>
+      </AppBar>
+        <Box  component="main" sx={{ padding:"3em", flexGrow: 2, p: 3}} >
+          <DrawerHeader />
+          <Filters sendToParent={this.getDataFromChild} />
+        </Box>
+      </Box>
+  )}
+}
+/*  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+
   return (
     <Box sx={{ display: 'flex', height:'100%'}}>
       <CssBaseline />
@@ -182,7 +249,7 @@ export default function SecondComponent() {
       </Drawer>
       <Box  component="main" sx={{ padding:"3em", flexGrow: 2, p: 3}} >
         <DrawerHeader />
-        <Filters />
+        <Filters sendToParent={this.getDataFromChild} />
         </Box>
     </Box>
     
@@ -191,4 +258,4 @@ export default function SecondComponent() {
     //{filter === "Pokemon" ? <FilterPokemons/> :null}
     //{filter === "Ability" ? <FilterAbilities/> :null}
     //{filter === "Moves" ? <FilterMoves/> :null}
-}
+}*/

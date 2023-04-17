@@ -51,10 +51,6 @@ const Accordion = styled((props: AccordionProps) => (
     borderTop: '1px solid rgba(0, 0, 0, .125)',
   }));
   
-
-
-
-
   type MyProps={
     //tabsArray: boolean[], 
     //value: number
