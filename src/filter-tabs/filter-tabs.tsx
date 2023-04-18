@@ -39,8 +39,7 @@ type MyProps={
 type MyState ={
   tabsArray: boolean[], 
   value: number,
-  filter:ClassFilter,
-  abilityOptions:{trigger:string[],target:string[],effect:string[]}
+  filter:ClassFilter
 }
 export default class Filters extends React.Component<MyProps, MyState> {
 
@@ -51,12 +50,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
     this.state ={
       tabsArray: [true,true,true,true,true],
       value:0,
-      filter: new ClassFilter(),
-      abilityOptions:{
-        trigger: ["trigger01","trigger02","trigger03"],
-        target: ["asd2"],
-        effect: ["asd3"]
-      }
+      filter: new ClassFilter()
       }
     }
     //const [tabsArray, setTabsArray] = useState([true,true,true,true,true]);
@@ -142,7 +136,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
       <StatsTab sendToParent={this.getStatData} stats={this.state.filter.stats }/>
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={2}>
-      <AbiltiesTab abilityOptions={this.state.abilityOptions} abilitySelected={this.state.filter.ability} sendToParent={this.getAbilityData} />
+      <AbiltiesTab abilitySelected={this.state.filter.ability} sendToParent={this.getAbilityData} />
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={3}>
      <MovesTab sendToParent={this.getMovesData} moves={this.state.filter.moves}/>

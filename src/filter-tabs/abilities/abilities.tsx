@@ -15,25 +15,44 @@ import './abilities-tab.css';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 type MyProps={
-    abilityOptions:{trigger:string[],target:string[],effect:string[]}
     abilitySelected:ClassAbility
 
     sendToParent:any,
 }
 type MyState ={
-  abilityOptions:{trigger:string[],target:string[],effect:string[]}
+  abilityOptions:{trigger:string[],target:string[],effect:string[], names:string[]}
   abilitySelected:ClassAbility
 }
 export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   constructor(props:MyProps){
     super(props)
     this.state={
-      abilityOptions: this.props.abilityOptions,
+      abilityOptions: {trigger:[],target:[],effect:[],names:[]},
       abilitySelected: this.props.abilitySelected,
     }
     this.abilityOnChange = this.abilityOnChange.bind(this);
     this.getData = this.getData.bind(this);
   }
+  componentDidMount(): void {
+    let cat_ability:string[] = ["trigger","target","effect"]
+    cat_ability.forEach(abilityCategory => {
+      fetch("http://localhost:8000/abilityKeys?category=" + abilityCategory)
+      .then(response => {return response.json()})
+      .then(data => {
+        this.setState({abilityOptions: {...this.state.abilityOptions,[abilityCategory]:data}})
+          })
+      })
+
+      fetch("http://localhost:8000/abilityNames")
+      .then(response => {return response.json()})
+      .then(data => {
+        this.setState({abilityOptions: 
+          {...this.state.abilityOptions,names:data}})
+        })
+    
+    }
+
+  
   //event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails
   abilityOnChange(
     event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, ID: ("trigger" | "effect" | "target"), details?: AutocompleteChangeDetails)
@@ -55,6 +74,10 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
     <Box sx={{ width: "100%" }}>
       <Paper elevation={3} >
 
+      <ComboBoxTags   label='Names' name='names'
+        items={this.state.abilityOptions.names}
+        data={this.state.abilitySelected.names}
+        sendToParent={this.getData}/>
 
       <ComboBoxTags   label='Trigger' name='trigger'
         items={this.state.abilityOptions.trigger}
