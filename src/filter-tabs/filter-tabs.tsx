@@ -137,6 +137,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={2}>
       <AbiltiesTab abilitySelected={this.state.filter.ability} sendToParent={this.getAbilityData} />
+
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={3}>
      <MovesTab sendToParent={this.getMovesData} moves={this.state.filter.moves}/>
