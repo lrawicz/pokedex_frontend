@@ -39,7 +39,8 @@ type MyProps={
 type MyState ={
   tabsArray: boolean[], 
   value: number,
-  filter:ClassFilter
+  filter:ClassFilter,
+  options:any
 }
 export default class Filters extends React.Component<MyProps, MyState> {
 
@@ -50,7 +51,8 @@ export default class Filters extends React.Component<MyProps, MyState> {
     this.state ={
       tabsArray: [true,true,true,true,true],
       value:0,
-      filter: new ClassFilter()
+      filter: new ClassFilter(),
+      options: {}
       }
     }
     //const [tabsArray, setTabsArray] = useState([true,true,true,true,true]);
@@ -74,6 +76,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
       </Box>
     );
   }
+
   a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
@@ -117,7 +120,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
     <Box sx={{ width: '100%' }} justifyContent="space-between">
 
     <Grid  container display={"grid"} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-      <Grid xs={8} item>
+      <Grid item>
           <Tabs value={this.state.value} onChange={this.tabChange}  aria-label="basic tabs example">
             <Tab  label="General" icon={<CatchingPokemonIcon/>}  {... this.a11yProps(0)} />
             <Tab  label="Stats"  icon={<AlignHorizontalLeftIcon/>}   {...this.a11yProps(1)} />

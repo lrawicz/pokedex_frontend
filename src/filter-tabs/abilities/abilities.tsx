@@ -1,7 +1,7 @@
 
 
 import * as React from 'react';
-import {Box,Paper} from '@mui/material';
+import {Box,Grid,Paper} from '@mui/material';
 import  { AutocompleteChangeDetails, AutocompleteChangeReason } from '@mui/material/Autocomplete';
 import Fab from '@mui/material/Fab';
 import Chip from '@mui/material/Chip';
@@ -15,24 +15,24 @@ import SearchIcon from '@mui/icons-material/Search';
 //Own:
 import { ClassAbility} from './classes'
 import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
-import './abilities-tab.css';
+import './abilities.css';
+import AbilityResponse from './ability-response';
 
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
+interface Dictionary{
+  [clave: string]: any
+}
 type MyProps={
     abilityFilter:ClassAbility
-
     sendToParent:any,
-}
-interface Dictionary{
-  [clave: string]: number
 }
 type MyState ={
   abilityOptions:{trigger:string[],target:string[],effect:string[], names:string[]}
   abilityFilter:ClassAbility
   abilityResult:Dictionary[];
-
+  openDialog:string
 }
 export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   constructor(props:MyProps){
@@ -40,22 +40,24 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
     this.state={
       abilityOptions: {trigger:[],target:[],effect:[],names:[]},
       abilityFilter: this.props.abilityFilter,
-      abilityResult: []
+      abilityResult: [],
+      openDialog:""
     }
     this.abilityOnChange = this.abilityOnChange.bind(this);
     this.getData = this.getData.bind(this);
   }
-  componentDidMount(): void {
+
+  async componentDidMount() {
     let cat_ability:string[] = ["trigger","target","effect"]
-    cat_ability.forEach(abilityCategory => {
-      fetch("http://localhost:8000/abilityKeys?category=" + abilityCategory)
+    for(const abilityCategory of cat_ability) {
+      await fetch("http://localhost:8000/abilityKeys?category=" + abilityCategory)
       .then(response => {return response.json()})
       .then(data => {
         this.setState({abilityOptions: {...this.state.abilityOptions,[abilityCategory]:data}})
-          })
       })
+    }
 
-      fetch("http://localhost:8000/abilityNames")
+      await fetch("http://localhost:8000/abilityNames")
       .then(response => {return response.json()})
       .then(data => {
         this.setState({abilityOptions: 
@@ -107,7 +109,7 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   }
   results(){
     return this.state.abilityResult.map((item, index) => (
-      <Chip label={item.name} variant="outlined" />
+          <AbilityResponse open={false} ability={item}/>
     ));
   }
   render() { return (
@@ -147,14 +149,16 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
           </div>
 
       <div onClick={()=>{console.log("hola")}} style={{ display: 'flex', justifyContent: 'center' }}>
-      <Stack direction="row" spacing={1}>
-        {this.results()}
+        <Grid  container   alignItems="center" justifyContent="center" rowSpacing={1} >
+          {this.results()}
+        </Grid>
+        </div>
         </Stack>
-      </div>
-      </Stack>
       </Paper>
     </Box>
 
-  )}
+)}
+//<Stack direction="row" spacing={1}>
+//</Stack>
 
 }
