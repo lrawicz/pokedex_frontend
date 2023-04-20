@@ -136,7 +136,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
       <StatsTab sendToParent={this.getStatData} stats={this.state.filter.stats }/>
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={2}>
-      <AbiltiesTab abilitySelected={this.state.filter.ability} sendToParent={this.getAbilityData} />
+      <AbiltiesTab abilityFilter={this.state.filter.ability} sendToParent={this.getAbilityData} />
 
     </this.TabPanel>
     <this.TabPanel value={this.state.value} index={3}>

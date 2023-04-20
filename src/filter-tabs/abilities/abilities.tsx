@@ -21,22 +21,26 @@ import './abilities-tab.css';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 type MyProps={
-    abilitySelected:ClassAbility
+    abilityFilter:ClassAbility
 
     sendToParent:any,
 }
+interface Dictionary{
+  [clave: string]: number
+}
 type MyState ={
   abilityOptions:{trigger:string[],target:string[],effect:string[], names:string[]}
-  abilitySelected:ClassAbility
-  abilityResult:string[]
+  abilityFilter:ClassAbility
+  abilityResult:Dictionary[];
+
 }
 export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   constructor(props:MyProps){
     super(props)
     this.state={
       abilityOptions: {trigger:[],target:[],effect:[],names:[]},
-      abilitySelected: this.props.abilitySelected,
-      abilityResult: ["simple","intimidate"]
+      abilityFilter: this.props.abilityFilter,
+      abilityResult: []
     }
     this.abilityOnChange = this.abilityOnChange.bind(this);
     this.getData = this.getData.bind(this);
@@ -60,27 +64,50 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
     
     }
 
-  
+  searchAbilities(): void{
+    let send_data:any = {}
+    for (let clave in this.state.abilityFilter) {
+        if (this.state.abilityFilter[clave as keyof typeof this.state.abilityFilter].value.length > 0){
+            send_data[clave] = this.state.abilityFilter[clave as keyof typeof this.state.abilityFilter]
+        }
+    }
+    let url = "http://localhost:8000/searchAbilities"
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(send_data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        this.setState({abilityResult: data})
+      })
+    .catch(error => console.error(error));
+
+
+  }
   //event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails
   abilityOnChange(
     event: React.SyntheticEvent<Element,Event>, value: string[], reason: AutocompleteChangeReason, ID: ("trigger" | "effect" | "target"), details?: AutocompleteChangeDetails)
     {
       let temp_ability:ClassAbility
-      temp_ability = this.state.abilitySelected
+      temp_ability = this.state.abilityFilter
       temp_ability[ID].value = value
-      this.setState({abilitySelected:temp_ability})
-      this.props.sendToParent(this.state.abilitySelected)
+      this.setState({abilityFilter:temp_ability})
+      this.props.sendToParent(this.state.abilityFilter)
   }
   getData(key:string,data:{value:string[],operator:("OneOf"|"ContainsAll")}){
-    let tmp_abilitySelected = this.state.abilitySelected
-    tmp_abilitySelected[key as keyof typeof this.state.abilitySelected] = data
+    let tmp_abilityFilter = this.state.abilityFilter
+    tmp_abilityFilter[key as keyof typeof this.state.abilityFilter] = data
     this.setState({
-      abilitySelected:tmp_abilitySelected
+      abilityFilter:tmp_abilityFilter
     })
   }
   results(){
     return this.state.abilityResult.map((item, index) => (
-      <Chip label={item} variant="outlined" />
+      <Chip label={item.name} variant="outlined" />
     ));
   }
   render() { return (
@@ -88,32 +115,32 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
       <Paper elevation={3} >
 
         <Stack direction="column" spacing={2}>
-          <ComboBoxTags   label='Names' name='names'
+          <ComboBoxTags   label='Names' name='name'
             items={this.state.abilityOptions.names}
-            data={this.state.abilitySelected.names}
+            data={this.state.abilityFilter.name}
             sendToParent={this.getData}/>
             
            <Divider />
 
           <ComboBoxTags   label='Trigger' name='trigger'
             items={this.state.abilityOptions.trigger}
-            data={this.state.abilitySelected.trigger}
+            data={this.state.abilityFilter.trigger}
             sendToParent={this.getData}/>
 
           <ComboBoxTags   label='Target' name='target'
             items={this.state.abilityOptions.target}
-            data={this.state.abilitySelected.target}
+            data={this.state.abilityFilter.target}
             sendToParent={this.getData}/>
 
 
           <ComboBoxTags   label='Effect' name='effect'
             items={this.state.abilityOptions.effect}
-            data={this.state.abilitySelected.effect}
+            data={this.state.abilityFilter.effect}
             sendToParent={this.getData}/>
             
             <Divider />
 
-          <div onClick={()=>{console.log("hola")}} style={{ display: 'flex', justifyContent: 'center' }}>
+          <div onClick={()=>{this.searchAbilities()}} style={{ display: 'flex', justifyContent: 'center' }}>
             <Fab  disabled aria-label="add">
               <SearchIcon    color="primary" />
             </Fab>
