@@ -34,9 +34,9 @@ export default class AbilityResponse extends React.Component<MyProps, MyState> {
           onClick={()=>{navigator.clipboard.writeText(pokemon.name)}}
           src={"http://localhost:8000/png/pokemon?ID=" + pokemon.ID} 
           />
-          <div>
+          <Box textAlign="center">
             {pokemon.name}
-          </div>
+          </Box>
         </Grid >  
 
     ))

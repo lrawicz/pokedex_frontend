@@ -1,6 +1,6 @@
 {
   "name": "pokedex-frontend",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
