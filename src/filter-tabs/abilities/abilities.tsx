@@ -48,20 +48,11 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   }
 
   async componentDidMount() {
-    let cat_ability:string[] = ["trigger","target","effect"]
-    for(const abilityCategory of cat_ability) {
-      await fetch("http://localhost:8000/abilityKeys?category=" + abilityCategory)
-      .then(response => {return response.json()})
-      .then(data => {
-        this.setState({abilityOptions: {...this.state.abilityOptions,[abilityCategory]:data}})
-      })
-    }
 
-      await fetch("http://localhost:8000/abilityNames")
+      await fetch("http://localhost:8000/abilityOptions")
       .then(response => {return response.json()})
       .then(data => {
-        this.setState({abilityOptions: 
-          {...this.state.abilityOptions,names:data}})
+        this.setState({abilityOptions: data})
         })
     
     }
