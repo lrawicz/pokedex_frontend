@@ -61,19 +61,16 @@ export default class Filters extends React.Component<MyProps, MyState> {
     const { children, value, index, ...other } = props;
   
     return (
-      <Box
+      <Grid container direction="row" justifyContent="center" alignItems="center"
         role="tabpanel"
         hidden={value !== index}
         id={`simple-tabpanel-${index}`}
         aria-labelledby={`simple-tab-${index}`}
+        textAlign={"center"}
         {...other}
       >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            {children}
-          </Box>
-        )}
-      </Box>
+        {value === index && (<Grid item  xs={8}>{children}</Grid>)}
+      </Grid>
     );
   }
 
@@ -117,43 +114,55 @@ export default class Filters extends React.Component<MyProps, MyState> {
   }
 
   render() { return (
-    <Box sx={{ width: '100%' }} justifyContent="space-between">
+    <Box  sx={{ width: '100%' }} justifyContent="space-between">
 
-    <Grid  container display={"grid"} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-      <Grid item>
-          <Tabs value={this.state.value} onChange={this.tabChange}  aria-label="basic tabs example">
-            <Tab  label="General" icon={<CatchingPokemonIcon/>}  {... this.a11yProps(0)} />
-            <Tab  label="Stats"  icon={<AlignHorizontalLeftIcon/>}   {...this.a11yProps(1)} />
-            <Tab  label="Ability" icon={<AutoFixHigh/>} {...this.a11yProps(2)}/>
-            <Tab  label="Moves" icon={<SportsMmaIcon/>} {...this.a11yProps(3)} />
-            <Tab sx={{backgroundColor:"#998b82"}} label="Defensive" icon={<GppMaybeIcon/>} {...this.a11yProps(4)} />
-            <Tab sx={{backgroundColor:"#998b82"}} label="Misc" icon={<MoreHorizIcon/>} {...this.a11yProps(5)} />
-            <Tab sx={{backgroundColor:"#8fd053"}} label="Filter" icon={<FilterAltIcon/>} {...this.a11yProps(6)} />
-          </Tabs>
-        </Grid>
-    </Grid>
-    <this.TabPanel value={this.state.value} index={0}>
-      <PokemonTab data={this.state.filter.general} sendToParent={this.getStatData}/>
-    </this.TabPanel>
-    <this.TabPanel value={this.state.value} index={1} >
-      <StatsTab sendToParent={this.getStatData} stats={this.state.filter.stats }/>
-    </this.TabPanel>
-    <this.TabPanel value={this.state.value} index={2}>
-      <AbiltiesTab abilityFilter={this.state.filter.ability} sendToParent={this.getAbilityData} />
+      <Grid  container display={"grid"} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Grid item>
+            <Tabs value={this.state.value} onChange={this.tabChange}  aria-label="basic tabs example">
+              <Tab  label="General" icon={<CatchingPokemonIcon/>}  {... this.a11yProps(0)} />
+              <Tab  label="Stats"  icon={<AlignHorizontalLeftIcon/>}   {...this.a11yProps(1)} />
+              <Tab  label="Ability" icon={<AutoFixHigh/>} {...this.a11yProps(2)}/>
+              <Tab  label="Moves" icon={<SportsMmaIcon/>} {...this.a11yProps(3)} />
+              <Tab sx={{backgroundColor:"#998b82"}} label="Defensive" icon={<GppMaybeIcon/>} {...this.a11yProps(4)} />
+              <Tab sx={{backgroundColor:"#998b82"}} label="Misc" icon={<MoreHorizIcon/>} {...this.a11yProps(5)} />
+              <Tab sx={{backgroundColor:"#8fd053"}} label="Filter" icon={<FilterAltIcon/>} {...this.a11yProps(6)} />
+            </Tabs>
+          </Grid>
+      </Grid>
 
-    </this.TabPanel>
-    <this.TabPanel value={this.state.value} index={3}>
-     <MovesTab sendToParent={this.getMovesData} moves={this.state.filter.moves}/>
-    </this.TabPanel>
-    <this.TabPanel value={this.state.value} index={4}>
-      Defensive Data
-    </this.TabPanel>
-    <this.TabPanel value={this.state.value} index={5}>
-      Misc.
-    </this.TabPanel>
-    <this.TabPanel value={this.state.value} index={6}>
-      <Results filter={this.state.filter}/>
-    </this.TabPanel>
-  </Box>
+      {/*General*/}
+      <this.TabPanel value={this.state.value} index={0}>
+        <PokemonTab data={this.state.filter.general} sendToParent={this.getStatData}/>
+      </this.TabPanel>
+
+      {/*STATS*/}
+      <this.TabPanel value={this.state.value} index={1} >
+        <StatsTab sendToParent={this.getStatData} stats={this.state.filter.stats }/>
+      </this.TabPanel>
+
+      {/*Abilities*/}
+      <this.TabPanel value={this.state.value} index={2}>
+        <AbiltiesTab abilityFilter={this.state.filter.ability} sendToParent={this.getAbilityData} />
+      </this.TabPanel>
+
+      {/*Moves*/}
+      <this.TabPanel value={this.state.value} index={3}>
+        <MovesTab sendToParent={this.getMovesData} moves={this.state.filter.moves}/>
+      </this.TabPanel>
+
+      {/*Defensive*/}
+      <this.TabPanel value={this.state.value} index={4}>
+        Defensive Data
+      </this.TabPanel>
+
+      {/*Misc*/}
+      <this.TabPanel value={this.state.value} index={5}>
+        Misc.
+      </this.TabPanel>
+      
+      <this.TabPanel value={this.state.value} index={6}>
+        <Results filter={this.state.filter}/>
+      </this.TabPanel>
+    </Box>
   )}
 }

@@ -26,10 +26,10 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
 
 //props.sendStatsToParent(stats)
   render() { return (
-    <Box sx={{ width: "100%" }}>
-      <Paper elevation={3} >
+    <Box bgcolor={"#29314a"}   textAlign={"center"}>
+      <Paper  elevation={3} >
 
-      <RangerBar name="hp" label='Hp'
+      <RangerBar  name="hp" label='Hp'
                   min={0} max={255} step={5} minDistance={0}
                   sendToParent={this.getDataFromChild}
                   data={this.state.stats.hp}

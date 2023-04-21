@@ -77,14 +77,11 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
 
     render() {
       return (
-
-          <Box display={"grid"}  sx={{ flexGrow: 1 }}>
-
-          <Grid justifySelf={"center"} container width={"60%"}  justifyContent="space-between" >
-              <Grid item xs={2}>
-                  <h3 className='display-table-cell'>{this.state.label}:</h3>
+          <Grid justifySelf={"center"} container width={"100%"}  justifyContent="space-between" >
+              <Grid  item xs={5}>
+                  <h3>{this.state.label}:</h3>
               </Grid>
-              <Grid item xs={6.8} sx={{paddingRight:"1em"}}>
+              <Grid item xs={7} sx={{paddingRight:"1em"}}>
                   <Slider
                       id={this.state.name}
                       getAriaLabel={() => 'Minimum distance shift'}
@@ -99,7 +96,6 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
                       />
               </Grid>
           </Grid>
-          </Box>
       )
     }
 }
