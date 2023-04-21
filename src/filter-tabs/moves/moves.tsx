@@ -15,7 +15,7 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import RangeBar from '../../components/range-bar/range-bar'
 import ComboBoxTags from '../../components/combo-box-tags/combo-box-tags'
 import MovesDialog from './moves-dialog'
-import { TypeMoveData, ClassMove, ClassMoveData, TypeMoveDataProp} from './classes'
+import { TypeMoveData, ClassMove, ClassMoveData, TypeMoveDataProp,MoveOptions} from './classes'
 
 const Accordion = styled((props: AccordionProps) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -61,7 +61,7 @@ const Accordion = styled((props: AccordionProps) => (
     expanded:number,
     moves:ClassMove[]
     test:boolean,
-    posibleTypes:string[]
+    options: MoveOptions
 
 }
 export default class movesTab extends React.Component<MyProps, MyState> {
@@ -80,22 +80,15 @@ export default class movesTab extends React.Component<MyProps, MyState> {
             expanded:0,
             moves: this.props.moves,
             test: false,
-            posibleTypes: []
+            options: new MoveOptions()
           }
         }
-    componentDidMount() {
-      fetch("https://pokeapi.co/api/v2/type")
-        .then(response => {
-          return response.json()
-        })
-        .then(data => {
-          let tmp_type: string[] = []
-          data.results.forEach((element: any) => {
-            tmp_type.push(element.name)
-          })
-          this.setState((prevState) => ({
-            posibleTypes: [...prevState.posibleTypes, ...tmp_type]
-          }))
+    async componentDidMount() {
+
+      await fetch("http://localhost:8000/moveOptions")
+      .then(response => {return response.json()})
+      .then(data => {
+        this.setState({options: data})
         })
     }
 
@@ -172,7 +165,7 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               {/*names*/}
               {(item.data.names.enable===true)?
                   <ComboBoxTags moveIndex={i} name='names' label='Names'
-                  items={['baton-pass','follow-me']}
+                  items={this.state.options.name}
                   data={item.data.names}
                   sendToParent={this.getFilterDataFromChild}/>
               :null}
@@ -180,23 +173,40 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               {/*damageClass*/}
               {(item.data.damageClass.enable===true)?
                   <ComboBoxTags moveIndex={i} label='Damage class' name='damageClass'
-                  items={['status','physical','special']}
+                  items={this.state.options.damage_class}
                   data={item.data.damageClass}
                   sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*types*/}
               {(item.data.types.enable===true)?
-                  <ComboBoxTags moveIndex={i} label='types' name='types'
-                  items={this.state.posibleTypes}
+                  <ComboBoxTags moveIndex={i} label='types' name='type'
+                  items={this.state.options.type}
                   data={item.data.types}
                   sendToParent={this.getFilterDataFromChild}/>
+              :null}
+
+              {/*MetaTypes*/}
+              {(item.data.metaType.enable===true)?
+                  <ComboBoxTags moveIndex={i} label='metaType' name='metaType'
+                  items={this.state.options.type}
+                  data={item.data.metaType}
+                  sendToParent={this.getFilterDataFromChild}/>
+              :null}
+
+              {/*category*/}
+              {/* ADD OPERATOR*/}
+              {(item.data.category.enable===true)?
+                <ComboBoxTags moveIndex={i}  label='category' name={"category"}
+                items={this.state.options.category}
+                data={item.data.category}
+                sendToParent={this.getFilterDataFromChild}/>
               :null}
 
               {/*target*/}
               {(item.data.target.enable===true)?
                 <ComboBoxTags moveIndex={i} label='target' name='target'
-                items={["all-opponents","user"]}
+                items={this.state.options.target}
                 data={item.data.target}
                 sendToParent={this.getFilterDataFromChild}/>
               :null}
@@ -241,19 +251,12 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               {/*statusEffect*/}
               {(item.data.statusEffect.enable===true)?
                 <ComboBoxTags moveIndex={i} label='status effect' name={"statusEffect"}
-                items={["asleep","burned"]}
+                items={this.state.options.ailment}
                 data={item.data.statusEffect}
                 sendToParent={this.getFilterDataFromChild}/>
               :null}
 
-              {/*category*/}
-              {/* ADD OPERATOR*/}
-              {(item.data.category.enable===true)?
-                <ComboBoxTags moveIndex={i}  label='category' name={"category"}
-                items={["damage","net-good-stats"]}
-                data={item.data.category}
-                sendToParent={this.getFilterDataFromChild}/>
-              :null}
+
             </AccordionDetails>
         </Accordion>
         );

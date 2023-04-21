@@ -5,7 +5,11 @@ export class ClassMoveData {
       = {value:[],enable:true, operator:"OneOf"}
     types:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}  
       = {value:[] ,enable:true, operator:"OneOf"}
-    target:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean} 
+    metaType:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}
+      = {value:[],enable:false, operator:"OneOf"}
+    category:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}
+      = {value:[],enable:false, operator:"ContainsAll"}
+    target:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}
       = {value:[],enable:false, operator:"OneOf"}
     power:{value:number[], enable:boolean, operator:"MinMax"}  
       = {value:[], enable:true,operator:"MinMax"}
@@ -17,8 +21,7 @@ export class ClassMoveData {
       = {value:[],enable:false,operator:"MinMax"}
     statusEffect:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}  
       = {value:[],enable:false, operator:"OneOf"}
-    category:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean} 
-      = {value:[],enable:false, operator:"ContainsAll"}
+
   }
 export class ClassMove {
     data: ClassMoveData = new ClassMoveData()
@@ -40,3 +43,12 @@ export let MovesLabel = {
   }
 export type TypeMoveDataProp =  keyof ClassMoveData
 export type TypeMoveData = keyof ClassMoveData
+
+export class MoveOptions{
+  name:string[] = []
+  target :string[] = []
+  damage_class :string[] = []
+  type :string[] = []
+  ailment :string[] = []
+  category :string[] = []
+}
