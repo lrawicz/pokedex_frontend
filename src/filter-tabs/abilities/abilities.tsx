@@ -91,7 +91,7 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
       this.setState({abilityFilter:temp_ability})
       this.props.sendToParent(this.state.abilityFilter)
   }
-  getData(key:string,data:{value:string[],operator:("OneOf"|"ContainsAll")}){
+  getData(key:string,data:{value:string[],operator:("or"|"and")}){
     let tmp_abilityFilter = this.state.abilityFilter
     tmp_abilityFilter[key as keyof typeof this.state.abilityFilter] = data
     this.setState({
@@ -105,31 +105,37 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
   }
   render() { return (
     <Box sx={{ width: "100%" }}>
-      <Paper elevation={3} >
 
         <Stack direction="column" spacing={2}>
           <ComboBoxTags   label='Names' name='name'
             items={this.state.abilityOptions.names}
             data={this.state.abilityFilter.name}
-            sendToParent={this.getData}/>
+            sendToParent={this.getData}
+            />
             
            <Divider />
 
           <ComboBoxTags   label='Trigger' name='trigger'
             items={this.state.abilityOptions.trigger}
             data={this.state.abilityFilter.trigger}
-            sendToParent={this.getData}/>
+            sendToParent={this.getData}
+            switchableOperator={true}
+            />
 
           <ComboBoxTags   label='Target' name='target'
             items={this.state.abilityOptions.target}
             data={this.state.abilityFilter.target}
-            sendToParent={this.getData}/>
+            sendToParent={this.getData}
+            switchableOperator={true}
+            />
 
 
           <ComboBoxTags   label='Effect' name='effect'
             items={this.state.abilityOptions.effect}
             data={this.state.abilityFilter.effect}
-            sendToParent={this.getData}/>
+            sendToParent={this.getData}
+            switchableOperator={true}
+            />
             
             <Divider />
 
@@ -145,7 +151,6 @@ export default class AbilitiesTab extends React.Component<MyProps, MyState> {
         </Grid>
         </div>
         </Stack>
-      </Paper>
     </Box>
 
 )}

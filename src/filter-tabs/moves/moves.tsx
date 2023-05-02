@@ -161,14 +161,15 @@ export default class movesTab extends React.Component<MyProps, MyState> {
             <AccordionDetails>
 
             <MovesDialog sendToParent={this.changeConfig} move={item} moveIndex={i}/>
-
+              <Grid container justifyContent="center" alignItems="center">
+                <Grid item xs={8}  bgcolor={"grey"} >
               {/*names*/}
-              {(item.data.names.enable===true)?
-                  <ComboBoxTags moveIndex={i} name='names' label='Names'
-                  items={this.state.options.name}
-                  data={item.data.names}
-                  sendToParent={this.getFilterDataFromChild}/>
-              :null}
+                  {(item.data.names.enable===true)?
+                      <ComboBoxTags moveIndex={i} name='names' label='Names'
+                      items={this.state.options.name}
+                      data={item.data.names}
+                      sendToParent={this.getFilterDataFromChild}/>
+                      :null}
 
               {/*damageClass*/}
               {(item.data.damageClass.enable===true)?
@@ -189,8 +190,9 @@ export default class movesTab extends React.Component<MyProps, MyState> {
               {/*MetaTypes*/}
               {(item.data.metaType.enable===true)?
                   <ComboBoxTags moveIndex={i} label='metaType' name='metaType'
-                  items={this.state.options.type}
+                  items={this.state.options.metaType}
                   data={item.data.metaType}
+                  switchableOperator={true}
                   sendToParent={this.getFilterDataFromChild}/>
               :null}
 
@@ -248,17 +250,18 @@ export default class movesTab extends React.Component<MyProps, MyState> {
                 sendToParent={this.getFilterDataFromChild}/>
               :null}
 
-              {/*statusEffect*/}
+              {/*ailment*/}
               {(item.data.statusEffect.enable===true)?
-                <ComboBoxTags moveIndex={i} label='status effect' name={"statusEffect"}
+                <ComboBoxTags moveIndex={i} label='status effect' name={"ailment"}
                 items={this.state.options.ailment}
                 data={item.data.statusEffect}
                 sendToParent={this.getFilterDataFromChild}/>
               :null}
 
-
-            </AccordionDetails>
-        </Accordion>
+              </Grid>
+            </Grid>
+          </AccordionDetails>
+      </Accordion>
         );
         });
     return (

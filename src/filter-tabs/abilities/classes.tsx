@@ -1,6 +1,6 @@
 export class ClassAbility{
-    trigger: {value: string[], operator:"OneOf" | "ContainsAll"} = {value:[],operator:"ContainsAll"}
-    target: {value: string[], operator:"OneOf" | "ContainsAll"} = {value:[],operator:"ContainsAll"}
-    effect: {value: string[], operator:"OneOf" | "ContainsAll"} = {value:[],operator:"ContainsAll"}
-    name: {value: string[], operator:"OneOf" | "ContainsAll"} = {value:[],operator:"OneOf"}
+    trigger: {value: string[], operator:"or" | "and"} = {value:[],operator:"and"}
+    target: {value: string[], operator:"or" | "and"} = {value:[],operator:"and"}
+    effect: {value: string[], operator:"or" | "and"} = {value:[],operator:"and"}
+    name: {value: string[], operator:"or" | "and"} = {value:[],operator:"or"}
   }

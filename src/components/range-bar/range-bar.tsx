@@ -81,7 +81,7 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
               <Grid  item xs={5}>
                   <h3>{this.state.label}:</h3>
               </Grid>
-              <Grid item xs={7} sx={{paddingRight:"1em"}}>
+              <Grid item xs={6} sx={{paddingRight:"1em"}}>
                   <Slider
                       id={this.state.name}
                       getAriaLabel={() => 'Minimum distance shift'}
@@ -95,6 +95,7 @@ export default class ComboBox extends React.Component<MyProps, MyState> {
                       marks={this.state.marks}
                       />
               </Grid>
+              <Grid xs={1} item/>
           </Grid>
       )
     }

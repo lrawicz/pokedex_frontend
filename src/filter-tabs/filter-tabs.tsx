@@ -63,13 +63,14 @@ export default class Filters extends React.Component<MyProps, MyState> {
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center"
         role="tabpanel"
+        width={"100%"}
         hidden={value !== index}
         id={`simple-tabpanel-${index}`}
         aria-labelledby={`simple-tab-${index}`}
         textAlign={"center"}
         {...other}
       >
-        {value === index && (<Grid item  xs={8}>{children}</Grid>)}
+        {value === index && (<Grid xs={12} item>{children}</Grid>)}
       </Grid>
     );
   }
@@ -114,7 +115,7 @@ export default class Filters extends React.Component<MyProps, MyState> {
   }
 
   render() { return (
-    <Box  sx={{ width: '100%' }} justifyContent="space-between">
+    <Box   justifyContent="space-between">
 
       <Grid  container display={"grid"} sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Grid item>

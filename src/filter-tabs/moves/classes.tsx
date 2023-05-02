@@ -1,16 +1,16 @@
 export class ClassMoveData {
-    names:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean} 
-      = {value:[],enable:true, operator:"OneOf"} 
-    damageClass:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean} 
-      = {value:[],enable:true, operator:"OneOf"}
-    types:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}  
-      = {value:[] ,enable:true, operator:"OneOf"}
-    metaType:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}
-      = {value:[],enable:false, operator:"OneOf"}
-    category:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}
-      = {value:[],enable:false, operator:"ContainsAll"}
-    target:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}
-      = {value:[],enable:false, operator:"OneOf"}
+    names:{value:string[], operator:"or" | "and",enable:boolean}
+      = {value:[],enable:true, operator:"or"}
+    damageClass:{value:string[], operator:"or" | "and",enable:boolean}
+      = {value:[],enable:true, operator:"or"}
+    types:{value:string[], operator:"or" | "and",enable:boolean}
+      = {value:[] ,enable:true, operator:"or"}
+    metaType:{value:string[], operator:"or" | "and",enable:boolean}
+      = {value:[],enable:false, operator:"or"}
+    category:{value:string[], operator:"or" | "and",enable:boolean}
+      = {value:[],enable:false, operator:"and"}
+    target:{value:string[], operator:"or" | "and",enable:boolean}
+      = {value:[],enable:false, operator:"or"}
     power:{value:number[], enable:boolean, operator:"MinMax"}  
       = {value:[], enable:true,operator:"MinMax"}
     priority:{value:number[], enable:boolean, operator:"MinMax"} 
@@ -19,8 +19,8 @@ export class ClassMoveData {
       = {value:[],enable:false,operator:"MinMax"}
     effectChance:{value:number[], enable:boolean, operator:"MinMax"} 
       = {value:[],enable:false,operator:"MinMax"}
-    statusEffect:{value:string[], operator:"OneOf" | "ContainsAll",enable:boolean}  
-      = {value:[],enable:false, operator:"OneOf"}
+    statusEffect:{value:string[], operator:"or" | "and",enable:boolean}
+      = {value:[],enable:false, operator:"or"}
 
   }
 export class ClassMove {
@@ -38,13 +38,15 @@ export let MovesLabel = {
     priority: "Priority",
     accurrency: "Accurrency",
     effectChance: "Effect Chance",
-    statusEffect: "Status Effect",
-    category: "Category"
+    ailment: "Status Effect",
+    category: "Category",
+    metaType: "Meta-Type"
   }
 export type TypeMoveDataProp =  keyof ClassMoveData
 export type TypeMoveData = keyof ClassMoveData
 
 export class MoveOptions{
+  metaType:string[] = []
   name:string[] = []
   target :string[] = []
   damage_class :string[] = []

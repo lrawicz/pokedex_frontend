@@ -26,13 +26,13 @@ export default class AbilityResponse extends React.Component<MyProps, MyState> {
           this.setState({ ability: this.props.ability });
         }
       }
-    pokemonList(pokemonList:{ID:number,name:string}[]){
+    pokemonList(pokemonList:{id:number,name:string}[]){
       
       return pokemonList.map((pokemon)=>(
         <Grid item xs={2} >
           <img width={"80em"} 
           onClick={()=>{navigator.clipboard.writeText(pokemon.name)}}
-          src={"http://localhost:8000/png/pokemon?ID=" + pokemon.ID} 
+          src={"http://localhost:8000/png/pokemon?id=" + pokemon.id}
           />
           <Box textAlign="center">
             {pokemon.name}

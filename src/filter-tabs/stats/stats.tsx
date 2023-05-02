@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { ClassStats,TypeStatsNames} from './classes'
 import RangerBar from '../../components/range-bar/range-bar'
+import {Grid,Box} from '@mui/material';
 
 type MyProps={
   sendToParent:any,
@@ -26,9 +26,8 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
 
 //props.sendStatsToParent(stats)
   render() { return (
-    <Box bgcolor={"#29314a"}   textAlign={"center"}>
-      <Paper  elevation={3} >
-
+    <Grid container justifyContent="center" alignItems="center">
+      <Grid item xs={8}  bgcolor={"grey"} >
       <RangerBar  name="hp" label='Hp'
                   min={0} max={255} step={5} minDistance={0}
                   sendToParent={this.getDataFromChild}
@@ -64,7 +63,7 @@ export default class StatsTab extends React.Component<MyProps, MyState>{
                   sendToParent={this.getDataFromChild}
                   data={this.state.stats.speed}
                   marks={[100,130]}/>
-      </Paper>
-      </Box>
+      </Grid>
+      </Grid>
   );}
 }
